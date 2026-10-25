@@ -50,7 +50,7 @@
 
 ### DCF and Equity Bridge
 
-[Show formulas, explicit cash flows, terminal value, discounting, EV-to-equity bridge or FCFE treatment, diluted shares, and per-share results.]
+[Show formulas, explicit cash flows, terminal value, discounting, EV-to-equity bridge or FCFE treatment, diluted shares, and per-share results. Reconcile terminal NOPAT to final explicit-year NOPAT × (1 + g) with terminal reinvestment = g / terminal ROIC; explain any normalization instead of leaving a silent discontinuity.]
 
 | Scenario | Enterprise / equity value | Per-share value | Key interpretation |
 |---|---:|---:|---|
@@ -72,8 +72,11 @@
 
 [Relevant multiples, aligned peer comparison, historical context, reverse DCF, and limitations.]
 
-**Margin-of-safety buy price:** [Base value × (1 - haircut)] = [price or unavailable].  
-**Cross-check:** [Bear value, downside, and why the threshold is not a floor.]
+**Margin-of-safety assessment:** [Rate the nine factors — forecast uncertainty, terminal-value dependence, leverage, cyclicality, durability, concentration, organizational uncertainty, scenario dispersion, evidence quality — and justify the haircut band: 10–20% / 20–30% / 30–40% / withhold.]  
+**Margin-of-safety buy price:** [Base value × (1 - justified haircut)] = [price or unavailable].  
+**Safety margin to Base value:** [haircut %]  
+**Bear-scenario downside at buy price:** [(Bear / buy price) - 1]  
+**Permanent-impairment protection:** [Conditional assessment; the threshold is not a guaranteed floor and does not cap losses.]
 
 ## 4. Seven-Agent Assessments
 

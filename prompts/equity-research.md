@@ -109,6 +109,17 @@ Show the forecast drivers and formulas, including:
 
 Use the same currency, units, forecast horizon, and valuation date throughout. If using mid-year discounting, disclose it and apply it consistently. Explain WACC components and why terminal growth is economically plausible. Cross-check terminal value as a share of EV and the implied terminal multiples.
 
+#### Terminal-Year Normalization Rules
+
+Terminal economics must connect to the explicit forecast without an unexplained jump or drop in profitability:
+
+- `Terminal NOPAT = final explicit-year NOPAT × (1 + terminal growth)`
+- `Terminal reinvestment rate = terminal growth / terminal ROIC`
+- `Terminal FCFF = Terminal NOPAT × (1 - terminal reinvestment rate)`
+- `TV = Terminal FCFF / (WACC - terminal growth)`
+
+Do not count terminal reinvestment twice. If terminal FCFF instead comes from a different cash-flow definition (for example NOPAT + D&A - CapEx - ΔNWC), show that it reconciles to the same economics. When implied terminal NOPAT diverges from the explicit forecast's final-year NOPAT carried forward by more than a small rounding tolerance, treat it as an **unexplained normalization**: either justify the transition explicitly (for example margin convergence to a stated mature level) or revise the forecast/terminal assumptions. Never let the terminal year silently weaken or strengthen profitability relative to the explicit trend.
+
 For FCFE, discount at cost of equity, calculate equity value directly, and do not apply the enterprise-to-equity bridge. Never mix FCFF with cost of equity or FCFE with WACC.
 
 #### Dilution and Consistency Checks
@@ -126,7 +137,29 @@ For FCFE, discount at cost of equity, calculate equity value directly, and do no
 4. Relevant P/E, P/S, P/B, and EV/EBITDA multiples only when meaningful, with aligned periods, currencies, share classes, and peer accounting.
 5. Current-price comparison and implied upside/downside when a dated price exists.
 6. Reverse-DCF or implied-expectations commentary when it adds material insight.
-7. Margin-of-safety buy price using `Base intrinsic value per share × (1 - required margin of safety)`, with the haircut tied to uncertainty and downside. Cross-check against Bear value; never describe it as a guaranteed floor.
+7. Margin-of-safety buy price using `Base intrinsic value per share × (1 - required margin of safety)`, with a justified haircut as defined below. Cross-check against Bear value; never describe it as a guaranteed floor.
+
+#### Margin-of-Safety Haircut Discipline
+
+Do not apply a universal haircut. Assess each factor as Low / Medium / High concern, with evidence:
+
+1. Cash-flow forecast uncertainty
+2. Terminal-value dependence (PV of TV as a share of EV)
+3. Financial leverage and refinancing risk
+4. Industry cyclicality
+5. Business-model and moat durability
+6. Customer or supplier concentration
+7. Management and organizational uncertainty
+8. Bear/Base/Bull valuation dispersion
+9. Quality, freshness, and completeness of evidence
+
+Use the assessment to select a haircut band, not a point estimate: roughly **10–20%** when concerns are predominantly Low, **20–30%** for a Medium profile, **30–40%** for predominantly High concerns. If several factors are High and evidence quality is poor, or if material inputs are missing, **withhold the precise buy price** instead of selecting an arbitrary number. State the chosen band, the specific factors driving it, and the exact haircut used.
+
+Always distinguish three different quantities:
+
+- **Safety margin to Base value:** how far the buy price sits below Base intrinsic value.
+- **Bear-scenario downside:** the loss from the buy price to Bear value, stated as a percentage.
+- **Protection against permanent impairment:** conditional and evidence-based, never a guarantee. A margin-of-safety price is not a guaranteed floor and does not cap losses.
 
 A wonderful business is not necessarily a wonderful investment at its current market price.
 

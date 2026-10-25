@@ -1,0 +1,21 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  deterministic-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run deterministic unit tests
+        run: python -m unittest discover -s tests -v
+        # Covers static structure, oracle mathematics, terminal consistency,
+        # edge cases, and committed behavioral artifacts. No network, no API
+        # keys, no LLM calls. Real-company smoke tests under tests/smoke/ are
+        # intentionally excluded: they depend on live external data.

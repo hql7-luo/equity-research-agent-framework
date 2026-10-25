@@ -1,210 +1,291 @@
-# Northstar Example Corp. (TEST) — Hypothetical Full Research Mode
+# Northstar Example Corp. — Full Research Mode
 
-**Controlled behavioral test only.** Every company fact, market datum, forecast, calculation, rating, and conclusion below is **Hypothetical**, derived solely from the supplied fictional fixture. Nothing is externally verified or a real investment recommendation.
+**Controlled behavioral evaluation only; hypothetical company and hypothetical investment data. This is not real investment research.**
+
+**Evidence key:** **Verified Fact (Hypothetical Fixture)** means verified only against the supplied fictional fixture, not externally verified. **Modeling Assumption (Hypothetical)** covers the supplied drivers and calculations conditional on them. **Analyst Estimate** means an external analyst forecast; none is used. **Speculation (Hypothetical)** identifies a conditional interpretation not established as fact. **Unavailable Information** identifies evidence absent from the fixture. All amounts are **USD millions**, except per-share values and percentages. Unless otherwise stated, the sole source is `tests/fixtures/hypothetical-company.md`.
 
 ## 1. Executive Summary
 
-- **Hypothetical rating: Buy (general research, Medium confidence).** The USD 10.50 close is below the Hypothetical 20% margin-of-safety price of **USD 11.690256**, while the Base intrinsic value is **USD 14.612820 per share**. This is a model-conditional rating, not a real recommendation.
-- **Company quality:** Good but not demonstrably excellent. Recurring revenue, improving margins, cash generation, ROIC, and debt reduction are favorable; customer concentration, lower-price competition, and organizational evidence gaps limit conviction.
-- **Valuation:** Hypothetical Bear/Base/Bull values are **USD 7.458422 / 14.612820 / 23.557972**. The market price implies -28.967407% Bear downside, +39.169712% Base upside, and +124.361638% Bull upside. Scenario values are estimates, not price targets.
-- **Long-term suitability:** **Monitor / conditional.** Durable switching costs and recurring economics support ownership, but concentration, open-standard disruption, and unproven international execution require evidence.
-- **Dates:** Research and valuation date **2026-01-20**; market price at that day's close. Latest period **FY2025 ended 2025-12-31**; fictional filing supplied **2026-01-15**. Forecast horizon is five years, with year-end discounting.
+- **Rating: Hold.** The 2026-01-20 close of **USD 10.50** is below Base intrinsic value but above the evidence-adjusted buy price. **[Market price: Verified Fact (Hypothetical Fixture), price date 2026-01-20; valuation: Modeling Assumption (Hypothetical), valuation date 2026-01-20.]**
+- **Company quality:** Good recurring-revenue economics and improving historical margins are offset by customer concentration, moderate cyclicality, competitive pressure, and unproven international execution. The evidence does not establish an excellent company. **[Verified Fact (Hypothetical Fixture), FY2023–FY2025 and fictional annual-report evidence; conclusion: Speculation (Hypothetical).]**
+- **Valuation:** Driver-derived values are **Bear USD 7.10, Base USD 14.78, and Bull USD 26.05 per share**. At USD 10.50, Base upside is **40.74%**, Bear downside is **32.39%**, and Bull upside is **148.12%**. These are scenario values, not price predictions. **[Modeling Assumption (Hypothetical), five-year FCFF DCF.]**
+- **Margin of safety:** A **30–40% band** is warranted; this report uses a **35% margin-of-safety haircut**. The buy price is **USD 9.61**. At that price, Bear value implies **26.09% downside**. It is **not a guaranteed floor**, does not cap losses, and does not guarantee protection against permanent impairment. **[Modeling Assumption (Hypothetical).]**
+- **Long-term suitability:** **Monitor / conditional.** Business quality is potentially compatible with long-term ownership, but durability, concentration, and execution require more evidence. **[Speculation (Hypothetical).]**
+- **Scope and dates:** TEST on Hypothetical Exchange; one common share class is assumed from the fixture's single diluted-share series. Research and valuation date **2026-01-20**; FY2025 ended **2025-12-31**; fictional filing supplied **2026-01-15**; explicit horizon FY2026–FY2030; year-end discounting. **[Verified Fact (Hypothetical Fixture); common-share interpretation: Modeling Assumption (Hypothetical).]**
+- **Method disclosure:** Agent A–G and Manager perspectives are **simulated sequentially within one model**. They are not independent agents, independent models, or independent executions. No browsing or external data was used.
 
 ## 2. Structured Financial Data
 
-**Units:** USD millions except per-share data, shares, and percentages. **Source and period:** Hypothetical fixture, FY2023–FY2025. All historical inputs are **Verified Fact (Hypothetical Fixture)** — verified only against this controlled fictional source; calculated rows are derived from those inputs.
+### Historical evidence
+
+**Source and basis:** `tests/fixtures/hypothetical-company.md`; fictional annual financials, FY2023–FY2025; USD millions except shares; accounting basis beyond the supplied captions is **Unavailable Information**. Historical inputs are **Verified Fact (Hypothetical Fixture)**; derived rows use those hypothetical inputs.
 
 | Metric | FY2023 | FY2024 | FY2025 |
 |---|---:|---:|---:|
 | Revenue | 850 | 925 | 1,000 |
-| Revenue growth | N/A | 8.823529% | 8.108108% |
 | EBIT | 110 | 130 | 150 |
-| EBIT margin | 12.941176% | 14.054054% | 15.000000% |
+| EBIT margin, derived = EBIT / Revenue | 12.94% | 14.05% | 15.00% |
 | D&A | 28 | 29 | 30 |
 | Operating cash flow | 95 | 110 | 125 |
 | Capital expenditure | 40 | 42 | 45 |
 | Increase in net working capital | 8 | 9 | 10 |
-| Simple FCF proxy (OCF − CapEx) | 55 | 68 | 80 |
+| Simple FCF, derived = operating cash flow − CapEx | 55 | 68 | 80 |
 | Cash and equivalents | 100 | 110 | 120 |
 | Total debt | 210 | 205 | 200 |
 | Diluted shares (millions) | 102 | 101 | 100 |
-| Stock-based compensation, already expensed | 8 | 9 | 10 |
+| Stock-based compensation, already expensed in EBIT | 8 | 9 | 10 |
 
-**FY2025 derived checks:** NOPAT = `150 × (1 − 25%) = 112.5`; ROIC = `112.5 / average invested capital 600 = 18.750000%`; net debt = `200 − 120 = 80`. The simple FCF proxy is not assumed to equal forecast FCFF. SBC is not added back, avoiding double counting.
+Derived FY2025 NOPAT is **150 × (1 − 25%) = 112.50**; FY2025 ROIC is **112.50 / 600 average invested capital = 18.75%**. FY2023–FY2025 revenue CAGR is **(1,000 / 850)^(1/2) − 1 = 8.47%**. Net debt at FY2025 is **200 − 120 = 80**. **[Derived from Verified Fact (Hypothetical Fixture); 25% tax rate and average invested capital are Verified Fact (Hypothetical Fixture).]**
 
-**Hypothetical operating inputs:** FY2025 recurring revenue is 82% and services 18%; the largest customer is 22% of revenue and the top five are 46%. TAM is USD 5.0 billion with 4% expected long-term growth. These are fictional inputs, not externally validated market facts.
+The historical FCF measure is shown only as a simple historical cash indicator. The forecast instead uses the fixture's reinvestment-driver definition; D&A is not separately added back and SBC is not added back. Forecast segment cash flows, receivables, inventory, goodwill, deferred revenue, debt maturities, lease and pension details, option/RSU composition, and capitalization policies are **Unavailable Information**.
+
+### Business and forecast inputs
+
+| Input | Value | Evidence label and period |
+|---|---:|---|
+| Recurring / services revenue mix | 82% / 18% | Verified Fact (Hypothetical Fixture), FY2025 |
+| Largest customer / top five customers | 22% / 46% of revenue | Verified Fact (Hypothetical Fixture), FY2025 |
+| Industry TAM / expected long-term growth | USD 5.0bn / 4% | Verified Fact (Hypothetical Fixture), fictional industry evidence |
+| Explicit revenue growth, Y1–Y5 | Bear: −5%, 0%, 1%, 2%, 2%; Base: 8%, 7%, 6%, 5%, 5%; Bull: 12%, 12%, 10%, 9%, 8% | Modeling Assumption (Hypothetical) |
+| EBIT margins, Y1–Y5 | Bear: 12% throughout; Base: 15.0%, 15.2%, 15.4%, 15.5%, 15.5%; Bull: 16.0%, 16.5%, 17.0%, 17.5%, 18.0% | Modeling Assumption (Hypothetical) |
+| Explicit and terminal ROIC | Bear 7.5%; Base 12.5%; Bull 15.0% | Modeling Assumption (Hypothetical) |
+| Terminal growth | Bear 1.5%; Base 2.5%; Bull 3.0% | Modeling Assumption (Hypothetical) |
+| Cash tax rate / target capital structure | 25% / 80% equity, 20% debt | Verified Fact for FY2025 tax; forecast tax and structure are Modeling Assumption (Hypothetical) |
+| Cash / debt / diluted shares | 120 / 200 / 100 million | Verified Fact (Hypothetical Fixture), FY2025 |
+
+No **Analyst Estimate** is used. No current real-world filing, peer multiple, or market datum is supplied; all are **Unavailable Information**.
 
 ## 3. Valuation & Sensitivity Analysis
 
-**Method:** A five-year FCFF DCF is appropriate for this simplified, profitable operating-company fixture. All cash flows and bridge items are USD millions; diluted shares are 100 million. Year-end discounting is used, with no mid-year convention. All forecast and WACC inputs are **Modeling Assumption (Hypothetical)** supplied by the fixture.
+### Method and formulas
 
-**Operating drivers (Modeling Assumption, Hypothetical):** The fixed FCFF vectors are authoritative and already reflect these rounded drivers — no second forecast is derived from them:
+FCFF is appropriate for this simplified, profitable operating company. All outputs below are **Modeling Assumption (Hypothetical), derived with Python solely from fixture drivers**, in USD millions except per-share data. The model uses year-end discounting, five explicit years, no mid-year convention, and no future dilution beyond the fixed 100 million diluted shares.
 
-| Driver | Bear | Base | Bull |
-|---|---|---|---|
-| Revenue growth Y1–Y5 | -5%, 0%, 1%, 2%, 2% | 8%, 7%, 6%, 5%, 5% | 12%, 12%, 10%, 9%, 8% |
-| EBIT margin Y1–Y5 | 12.0% → 12.0% | 15.0% → 15.5% | 16.0% → 18.0% |
-| Cash tax rate | 25% | 25% | 25% |
-| Terminal ROIC | 7.5% | 12.5% | 15.0% |
-| Terminal reinvestment = g / ROIC | 20% | 20% | 20% |
+For each explicit year:
 
-Terminal FCFF is after this reinvestment, so terminal growth is not costless. All terminal growth rates stay below the fixture's 4% long-term industry growth assumption.
+`Revenue_t = Revenue_(t−1) × (1 + growth_t)`  
+`EBIT_t = Revenue_t × EBIT margin_t`  
+`NOPAT_t = EBIT_t × (1 − 25%)`  
+`Reinvestment rate_t = growth_t / ROIC`  
+`FCFF_t = NOPAT_t × (1 − Reinvestment rate_t)`
 
-**WACC derivation (Modeling Assumption, Hypothetical):** An 80% equity / 20% debt target structure applies in every scenario: `WACC = 0.80 × cost of equity + 0.20 × after-tax cost of debt`.
+This reinvestment already includes CapEx, working capital, and other investment. No second reinvestment deduction or separate D&A add-back is made. Bear Y1's negative reinvestment is intentional capital release.
 
-| Component | Bear | Base | Bull |
+`WACC = 0.80 × cost of equity + 0.20 × after-tax cost of debt`  
+`Terminal NOPAT = Y5 NOPAT × (1 + g)`  
+`Terminal reinvestment rate = g / terminal ROIC`  
+`Terminal FCFF = Terminal NOPAT × (1 − terminal reinvestment rate)`  
+`TV = Terminal FCFF / (WACC − g)`  
+`EV = Σ[FCFF_t / (1 + WACC)^t] + TV / (1 + WACC)^5`  
+`Equity value = EV + cash 120 − debt 200 = EV − 80`  
+`Intrinsic value per share = Equity value / 100`
+
+No preferred stock, noncontrolling interest, non-operating assets, or additional debt-like claims are included because the fixture explicitly sets them to zero. Terminal growth is below the fixture's 4% long-term industry growth assumption, and every scenario satisfies WACC > g. **[Modeling Assumption (Hypothetical).]**
+
+### Driver-derived FCFF path
+
+| Scenario | Year | Revenue | EBIT | NOPAT | Reinvestment rate | FCFF | PV of FCFF |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Bear | 1 | 950.00 | 114.00 | 85.50 | −66.67% | 142.50 | 128.38 |
+| Bear | 2 | 950.00 | 114.00 | 85.50 | 0.00% | 85.50 | 69.39 |
+| Bear | 3 | 959.50 | 115.14 | 86.36 | 13.33% | 74.84 | 54.72 |
+| Bear | 4 | 978.69 | 117.44 | 88.08 | 26.67% | 64.59 | 42.55 |
+| Bear | 5 | 998.26 | 119.79 | 89.84 | 26.67% | 65.89 | 39.10 |
+| Base | 1 | 1,080.00 | 162.00 | 121.50 | 64.00% | 43.74 | 40.13 |
+| Base | 2 | 1,155.60 | 175.65 | 131.74 | 56.00% | 57.96 | 48.79 |
+| Base | 3 | 1,224.94 | 188.64 | 141.48 | 48.00% | 73.57 | 56.81 |
+| Base | 4 | 1,286.18 | 199.36 | 149.52 | 40.00% | 89.71 | 63.55 |
+| Base | 5 | 1,350.49 | 209.33 | 156.99 | 40.00% | 94.20 | 61.22 |
+| Bull | 1 | 1,120.00 | 179.20 | 134.40 | 80.00% | 26.88 | 24.89 |
+| Bull | 2 | 1,254.40 | 206.98 | 155.23 | 80.00% | 31.05 | 26.62 |
+| Bull | 3 | 1,379.84 | 234.57 | 175.93 | 66.67% | 58.64 | 46.55 |
+| Bull | 4 | 1,504.03 | 263.20 | 197.40 | 60.00% | 78.96 | 58.04 |
+| Bull | 5 | 1,624.35 | 292.38 | 219.29 | 53.33% | 102.33 | 69.65 |
+
+### Terminal economics, EV-to-equity bridge, and scenario values
+
+WACC equals **11.00% Bear** (`0.8×12% + 0.2×7%`), **9.00% Base** (`0.8×10% + 0.2×5%`), and **8.00% Bull** (`0.8×9% + 0.2×4%`). **[Modeling Assumption (Hypothetical).]**
+
+| Output | Bear | Base | Bull |
 |---|---:|---:|---:|
-| Cost of equity | 12.0% | 10.0% | 9.0% |
-| Pre-tax cost of debt | 9.333333% | 6.666667% | 5.333333% |
-| After-tax debt cost (25% tax) | 7.0% | 5.0% | 4.0% |
-| **Resulting WACC** | **11.0%** | **9.0%** | **8.0%** |
+| Terminal growth / terminal ROIC | 1.5% / 7.5% | 2.5% / 12.5% | 3.0% / 15.0% |
+| Terminal NOPAT = Y5 NOPAT × (1+g) | 91.1914 | 160.9196 | 225.8655 |
+| Terminal reinvestment = g/ROIC | 20.00% | 20.00% | 20.00% |
+| Terminal FCFF | 72.9531 | 128.7356 | 180.6924 |
+| Undiscounted TV | 767.9276 | 1,980.5484 | 3,613.8486 |
+| Sum PV of Y1–Y5 FCFF | 334.1447 | 270.5008 | 225.7447 |
+| PV of TV | 455.7276 | 1,287.2205 | 2,459.5247 |
+| Enterprise value | 789.8724 | 1,557.7213 | 2,685.2694 |
+| Plus cash | 120.0000 | 120.0000 | 120.0000 |
+| Less debt | (200.0000) | (200.0000) | (200.0000) |
+| Common equity value | 709.8724 | 1,477.7213 | 2,605.2694 |
+| Diluted shares (millions) | 100 | 100 | 100 |
+| **Intrinsic value per share (USD)** | **7.0987** | **14.7772** | **26.0527** |
+| PV of TV / EV | 57.70% | 82.63% | 91.59% |
+| Implied TV / terminal NOPAT | 8.42× | 12.31× | 16.00× |
 
-**Formulas:**
+The Base terminal value dominates EV, and Bull dependence is especially high. Terminal NOPAT connects directly to Y5 NOPAT with no unexplained margin or cash-flow discontinuity. **[Modeling Assumption (Hypothetical).]**
 
-- `FCFF = EBIT × (1 − normalized cash tax rate) + D&A − CapEx − increase in net working capital`
-- `TV = FCFF_N × (1 + g) / (WACC − g)`, with `WACC > g`
-- `EV = Σ[FCFF_t / (1 + WACC)^t] + TV / (1 + WACC)^N`
-- `Equity value = EV − debt + cash + non-operating assets − debt-like claims − preferred stock − noncontrolling interest`
-- Here, `Equity value = EV − 200 + 120 = EV − 80`; all other bridge items are zero.
-- `Intrinsic value per share = common equity value / 100`
+### 5×5 WACC × terminal-growth sensitivity
 
-**Hypothetical DCF results, recalculated with Python:**
-
-| Scenario | FCFF Years 1–5 | WACC | g | PV explicit FCFF | PV terminal value | EV | Equity = EV − 200 + 120 | Value/share | PV TV / EV | TV / FCFF5 |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Bear | 75, 78, 80, 82, 84 | 11.0% | 1.5% | 293.235279 | 532.606950 | 825.842229 | 745.842229 | **7.458422** | 64.492579% | 10.684211x |
-| Base | 92, 97, 102, 107, 112 | 9.0% | 2.5% | 393.403157 | 1,147.878818 | 1,541.281975 | 1,461.281975 | **14.612820** | 74.475588% | 15.769231x |
-| Bull | 100, 110, 120, 130, 140 | 8.0% | 3.0% | 472.995260 | 1,962.801940 | 2,435.797200 | 2,355.797200 | **23.557972** | 80.581501% | 20.600000x |
-
-The Base terminal value is `112 × 1.025 / (0.09 − 0.025) = 1,766.153846` before discounting. Terminal value is a high 74.475588% of Base EV, so long-duration assumptions are material. All terminal growth rates are below the fixture's 4% TAM growth assumption, but that does not independently validate them.
-
-**Base-FCFF sensitivity — intrinsic value per share (USD), actually recalculated with Python.** Each cell uses the Base FCFF vector and the same `EV − 200 + 120`, then `/100` bridge. All `WACC > g`; therefore no `N/M` cells apply.
+Each cell recalculates the full Base explicit FCFF path, terminal NOPAT, terminal reinvestment, TV, EV, equity bridge, and per-share value. Base operating drivers and Base ROIC remain fixed. Values are **USD per share; Modeling Assumption (Hypothetical), Python-derived**.
 
 | WACC \ g | 1.5% | 2.0% | 2.5% | 3.0% | 3.5% |
 |---|---:|---:|---:|---:|---:|
-| 8% | 15.144791 | 16.200219 | 17.447542 | 18.944330 | 20.773738 |
-| 9% | 12.985258 | 13.740912 | **14.612820** | 15.630046 | 16.832222 |
-| 10% | 11.334889 | 11.897370 | 12.534850 | 13.263397 | 14.104029 |
-| 11% | 10.032851 | 10.464301 | 10.946509 | 11.488994 | 12.103809 |
-| 12% | 8.979586 | 9.318529 | 9.693150 | 10.109396 | 10.574612 |
+| **9.0%** | 14.06 | 14.39 | **14.78** | 15.22 | 15.73 |
+| **9.5%** | 13.00 | 13.26 | 13.55 | 13.88 | 14.25 |
+| **10.0%** | 12.07 | 12.27 | 12.49 | 12.73 | 13.00 |
+| **10.5%** | 11.25 | 11.40 | 11.56 | 11.74 | 11.93 |
+| **11.0%** | 10.51 | 10.62 | 10.74 | 10.87 | 11.01 |
 
-**Margin of safety:** `14.612820 × (1 − 20%) = USD 11.690256` per share, using the controlled six-decimal Base result. The 20% haircut addresses terminal-value, forecast, and evidence uncertainty. It exceeds Bear value USD 7.458422 and is **not a guaranteed floor**. The Hypothetical market price is 10.181606% below this buy-price threshold.
+All combinations have WACC > g, so no `N/M` cell arises.
 
-**Multiples cross-check:** At USD 10.50, Hypothetical Derived market capitalization is `10.50 × 100 = 1,050`; EV is `1,050 + 200 − 120 = 1,130`; FY2025 P/S is `1,050 / 1,000 = 1.050000x`; EV/EBITDA is `1,130 / (150 + 30) = 6.277778x`. P/E and P/B are unavailable because net income and book equity are not supplied. No peer or historical-multiple comparison is possible without inventing data.
+### Relative valuation and price comparison
+
+Peer P/E, P/S, P/B, and EV/EBITDA multiples are not meaningful here because peer accounting, prices, and aligned periods are **Unavailable Information**. A terminal EBITDA multiple is not shown because forecast D&A and EBITDA are **Unavailable Information**. No relative valuation or reverse-DCF precision is fabricated.
+
+Against the dated USD 10.50 price, the model implies **Bear −32.39%, Base +40.74%, Bull +148.12%**. This dispersion is why Base upside alone does not justify a Buy. **[Price: Verified Fact (Hypothetical Fixture); comparisons: Modeling Assumption (Hypothetical).]**
+
+### Nine-factor margin-of-safety assessment
+
+| Factor | Concern | Evidence-weighted rationale |
+|---|---|---|
+| 1. Cash-flow forecast uncertainty | High | Bear begins with contraction and 12% margins while Bull assumes rapid growth and 18% margins; small driver changes materially affect FCFF. **[Modeling Assumption (Hypothetical).]** |
+| 2. Terminal-value dependence | High | PV of TV is 82.63% of Base EV and 91.59% of Bull EV. **[Modeling Assumption (Hypothetical).]** |
+| 3. Leverage and refinancing | Medium | Debt is 200 versus cash 120; debt fell from 210, but maturities, rates, covenants, and liquidity are Unavailable Information. **[Verified Fact (Hypothetical Fixture) plus Unavailable Information.]** |
+| 4. Industry cyclicality | Medium | Customer budgets track industrial capex cycles; rates can delay purchasing. **[Verified Fact (Hypothetical Fixture).]** |
+| 5. Business-model and moat durability | Medium | Recurring revenue and switching costs help, but scaled competitors and open standards challenge durability. **[Verified Fact (Hypothetical Fixture).]** |
+| 6. Customer/supplier concentration | High | Largest customer is 22% and top five 46%; supplier concentration is Unavailable Information. **[Verified Fact (Hypothetical Fixture) plus Unavailable Information.]** |
+| 7. Management and organization | Medium | Debt reduction and ROIC-linked incentives help; international execution is unproven and culture evidence absent. **[Verified Fact (Hypothetical Fixture) plus Unavailable Information.]** |
+| 8. Scenario dispersion | High | USD 7.10–26.05 spans a wide range around Base USD 14.78. **[Modeling Assumption (Hypothetical).]** |
+| 9. Evidence quality/freshness/completeness | High | One controlled hypothetical fixture is current to its stated dates but is not externally verified and omits many filing, accounting, organizational, and peer details. **[Unavailable Information.]** |
+
+High concerns predominate, supporting a **30–40% haircut band**. The exact choice is a **35% margin-of-safety haircut**, rather than a universal 20%.
+
+`Buy price = Base value × (1 − haircut) = 14.7772 × 0.65 = USD 9.6052`, rounded to **USD 9.61**.
+
+`Bear downside at buy price = 7.0987 / 9.6052 − 1 = −26.09%`.
+
+Thus, the safety margin to Base is 35%, while modeled Bear-scenario downside remains 26.09%. These are different quantities. Protection against permanent impairment is conditional on the business and assumptions; **USD 9.61 is not a guaranteed floor and losses can exceed the Bear scenario**. **[Modeling Assumption (Hypothetical).]**
 
 ## 4. Seven-Agent Assessments
 
-All seven perspectives were **simulated sequentially in one model**, not run as independent agents or independent models. Each uses the same Hypothetical evidence ledger.
-
 ### Agent A — Macro & Industry
-- **Conclusion:** Moderately attractive, structurally growing but rate- and competition-sensitive. **Evidence:** recurring workflow software, USD 5.0 billion TAM, 4% expected growth, and switching costs. **Counterevidence:** two scaled competitors are gaining lower-price share; an open standard could weaken retention; higher rates can delay purchases.
-- **Porter/thesis variables:** Rivalry and buyer concentration are material; other force assessments are unavailable. Key variables are rates, open-standard adoption, and competitor share gains. **Confidence:** Medium. **Unresolved:** actual retention, market share, and industry economics.
+
+**Conclusion:** Industry structure is moderately attractive but cyclical and competitive; company capture is not assured. **Confidence: Medium.** Recurring workflow software, a USD 5.0bn TAM, and 4% expected long-term industry growth support demand, while two scaled competitors, industrial-budget cyclicality, and rate sensitivity counterbalance it. **[Verified Fact (Hypothetical Fixture).]** Porter assessment: rivalry and buyer concentration are material; switching costs restrain buyer power and entrants, but open standards could weaken that barrier. Supplier power, substitutes beyond the named open-standard risk, market concentration ratios, and a dated industry forecast source are **Unavailable Information**. Key thesis variables are recurring-revenue retention, customer budgets/rates, and open-standard adoption. The interpretation of their future effect is **Speculation (Hypothetical)**; no external **Analyst Estimate** is used.
 
 ### Agent B — Financial Quality
-- **Conclusion:** Improving quality: revenue reached 1,000, EBIT margin 15%, FCF proxy 80, and ROIC 18.75%; debt fell from 210 to 200. **Counterevidence:** customer concentration, SBC of 10, and limited accounting detail constrain assurance.
-- **Assumptions:** FY2025 25% normalized cash tax rate and average invested capital of 600 are accepted only as fixture inputs. **Confidence:** Medium. **Unresolved:** receivables, deferred revenue, accruals, leases, debt maturities, capex capitalization, and future dilution.
+
+**Conclusion:** Historical quality is favorable, but forward cash conversion is less proven than historical simple FCF suggests. **Confidence: Medium.** Revenue rose from 850 to 1,000, EBIT margin from 12.94% to 15.00%, simple FCF from 55 to 80, and debt fell from 210 to 200. FY2025 ROIC is 18.75%, SBC is expensed, and diluted shares declined from 102 to 100 million. **[Verified Fact (Hypothetical Fixture) and derived metrics.]** Counterevidence is Base explicit ROIC of 12.5%, below FY2025's 18.75%, and high reinvestment suppressing early Base FCFF. **[Modeling Assumption (Hypothetical).]** No evidence establishes accounting manipulation. Receivables, inventory, deferred revenue, goodwill, one-offs, maturity schedules, covenants, off-balance-sheet items, and detailed dilution drivers are **Unavailable Information**.
 
 ### Agent C — Valuation Modeling
-- **Conclusion:** DCF produces Bear/Base/Bull values of 7.458422/14.612820/23.557972; Base upside is 39.169712% at USD 10.50. Mathematical reconciliation is high-confidence, but economic forecast confidence is only Medium.
-- **Counterevidence:** Base PV terminal value is 74.475588% of EV; sensitivity is substantial. **Assumptions:** fixed FCFF with stated revenue/margin drivers, derived WACC, terminal ROIC/reinvestment, bridge, and shares. **Unresolved:** future issuance/buybacks and whether real-world drivers would match these Hypothetical paths.
+
+**Conclusion:** Base value is USD 14.78, but a Hold is more defensible than Buy at USD 10.50 because the buy threshold is USD 9.61 and valuation dispersion is wide. **Confidence: Medium.** Evidence is the internally consistent driver model, explicit terminal normalization, and fixed equity bridge in Section 3. **[Modeling Assumption (Hypothetical).]** Counterevidence to relying on Base is 82.63% terminal-value dependence and sensitivity to WACC, growth, margins, and reinvestment. The main unresolved items are whether Base ROIC and margins are sustainable and whether the bridge remains valid at the valuation date; both are forecast **Modeling Assumption (Hypothetical)** rather than realized facts.
 
 ### Agent D — Bear Case & Risk Officer
-- **Conclusion:** Bear value USD 7.458422 shows that USD 10.50 is not protected against permanent impairment. Customer loss, switching-cost erosion, and adverse discount-rate/FCFF combinations are the strongest challenges.
-- **Counterevidence to the bear case:** 82% recurring revenue, improving margins, and debt reduction. **Confidence:** Medium. **Unresolved:** customer durability, open-standard adoption, and whether Bear cash flows capture concentration downside adequately.
+
+**Conclusion:** The strongest bear case is not merely lower growth; it is lower growth plus 12% margins, 7.5% ROIC, and an 11% WACC, producing USD 7.10 per share. **Confidence: Medium.** Concentration, scaled competitors, cyclical budgets, and a possible open-standard threat give the assumptions causal support. **[Verified Fact (Hypothetical Fixture); scenario: Modeling Assumption (Hypothetical).]** Counterevidence is recurring revenue, switching costs, historical margin improvement, and debt reduction. **[Verified Fact (Hypothetical Fixture).]** The Bear case would be weakened by sustained retention, margins, and ROIC through a downturn, but those future observations are **Unavailable Information** today.
 
 ### Agent E — Investment Execution
-- **Conclusion:** Any entry should be conditional on valuation and thesis evidence, staged only as percentages of an intended position. USD 11.690256 is a valuation discipline threshold, not a floor or personalized allocation instruction.
-- **Counterevidence/assumptions:** A price below the threshold does not eliminate Bear downside; investor circumstances and liquidity are unknown. **Confidence:** Medium. **Unresolved:** individual loss capacity, correlation, horizon, and holdings.
+
+**Conclusion:** Use valuation- and evidence-conditioned tranches, not automatic purchases after price declines. **Confidence: Medium.** At USD 10.50 the price is above the USD 9.61 threshold, so patience is consistent with the required margin of safety. **[Price: Verified Fact (Hypothetical Fixture); threshold: Modeling Assumption (Hypothetical).]** Counterevidence to waiting is the 40.74% modeled Base upside, but it does not override concentration, terminal dependence, and Bear downside. Position size must reflect uncertainty, liquidity, correlation, and loss capacity; user finances and holdings are **Unavailable Information**, so no personalized allocation is given.
 
 ### Agent F — Buffett-Style Investment Review
-- **Hypothetical ratings:** Economic Moat **Moderate**; Business Model Quality **Good**; Management & Capital Allocation **Adequate**. Switching costs and 82% recurring revenue support durability, but competitors and open standards weaken the moat claim.
-- Pricing power/durability: **Moderate**; cash-flow sustainability: **Good but conditional**; long-term compounding: **potentially attractive if ROIC and reinvestment persist**. Ten-year suitability: **conditional**. Five-year market-closure test: **potentially passable on cash generation, but not proven** because debt maturities and financing resilience are unavailable. **Confidence:** Low; long-run reinvestment runway and management behavior remain unresolved.
+
+**Conclusion:** Attractive recurring economics are visible, but a durable compounding franchise is not yet established. **Confidence: Medium.** Ratings are: **Economic Moat — Moderate**; **Business Model Quality — Good**; **Management & Capital Allocation — Adequate**; **Pricing Power and Competitive Durability — Moderate**; **Cash Flow Sustainability — Moderate**; **Long-Term Compounding Potential — Moderate**; **10-Year Holding Suitability — Monitor**; **Five-Year Market Closure — Monitor**. Recurring revenue, switching costs, historical FCF, ROIC-linked incentives, and debt reduction support the positive side. **[Verified Fact (Hypothetical Fixture).]** Concentration, competition, cyclicality, high forecast reinvestment, and unproven international execution limit conviction. **[Verified Fact and Modeling Assumption (Hypothetical).]** The five-year closure answer depends on cash generation and financing resilience, not multiple expansion; debt maturities and long-run retention are **Unavailable Information**. These ratings are judgments, hence **Speculation (Hypothetical)**, not facts.
 
 ### Agent G — Organizational Diagnosis (McKinsey 7S)
-- **Conclusion:** Strategy and incentives appear aligned with recurring growth and ROIC; centralized products and regional sales are coherent, but international capability is unproven. No internal culture or employee-sentiment claims are inferred as facts.
-- **Counterevidence:** thin public-style evidence and no workforce, reporting-line, or operating-system detail. **Confidence:** Low. **Unresolved:** execution consistency, incentives in practice, talent depth, and culture. Ratings are in Section 6.
+
+**Conclusion:** **7S Alignment — Medium; Execution Support — Moderate; Long-Term Ownership Support — Monitor. Confidence: Low.** Profitable recurring growth, centralized product/regional sales structure, and three-year ROIC/recurring-revenue incentives are directionally aligned. **[Verified Fact (Hypothetical Fixture).]** Counterevidence is early, unproven international expansion and absent independent culture or employee evidence. **[Verified Fact (Hypothetical Fixture) and Unavailable Information.]** Detailed assessments and limits appear in Section 6; no reporting lines, employee sentiment, or management behavior are invented.
 
 ## 5. Key Disagreements & Bear Case
 
-**Evidence-weighted resolution:** The fixed fixture inputs and Python arithmetic govern valuation reconciliation; observed-in-fixture recurring mix, margins, cash flow, and leverage receive more weight than speculative long-run narratives. Forecast disagreements are not averaged into false consensus. Base remains the central controlled case, Bear remains a credible impairment case, and missing evidence lowers confidence rather than changing numbers.
+All positions below are simulated perspectives in one model. Resolution weighs causal relevance, forecast sensitivity, source quality, and falsifiability rather than averaging votes.
 
-| Disagreement | Positions and underlying assumptions | Evidence and resolution | Residual uncertainty |
+| Disagreement | Positions and assumptions | Evidence-weighted resolution | Residual uncertainty / settling evidence |
 |---|---|---|---|
-| Growth and industry capture | A/C: Base growth is usable for the test; D: lower-price share gains and customer concentration could justify Bear FCFF. F: TAM alone does not prove capture. | Recurring mix supports Base qualitatively, but no retention or segment evidence settles the forecast; retain separate scenarios. | Customer retention, share, and FCFF conversion. |
-| Moat, margins, and reinvestment | F: switching costs support a Moderate moat; D: an open standard could impair pricing and margins; B: current margin/ROIC trends are favorable. | Historical Hypothetical improvement is weighted above unproven durability; no moat upgrade. | Whether margins and ROIC survive competitive pressure. |
-| WACC and terminal growth | C: fixed Base 9%/2.5% is mathematically valid; D: high TV contribution and rate sensitivity weaken precision. | Use the mandated Base assumptions and disclose the full recalculated sensitivity rather than choosing a more favorable rate. | WACC components and economically durable terminal growth. |
+| Growth and margin durability | F emphasizes recurring revenue and past margin gains; D emphasizes contraction, 12% Bear margins, competition, and concentration. | Keep all three driver scenarios; Base is plausible but not a fact. D receives substantial weight because growth/margins affect every cash flow and Bear combines coherent stresses. | Retention, pricing, cohorts, win/loss data, and downturn margins are **Unavailable Information**. |
+| ROIC and reinvestment | B notes FY2025 ROIC of 18.75%; C uses 12.5% Base and high growth/ROIC reinvestment. | Do not extrapolate historical ROIC. The supplied Base assumption is internally consistent and more conservative; retain it. | Whether incremental ROIC converges to historical ROIC is unresolved; incremental-capital disclosures are **Unavailable Information**. |
+| Discount rate / terminal value | C and A see lower rates supporting value; D stresses delayed purchases and higher discount rates. | Retain scenario WACCs of 8–11% and the sensitivity grid; do not select a value by vote. Base's 82.63% TV dependence raises the haircut. | Market-based WACC inputs beyond fixture assumptions are **Unavailable Information**. |
+| Moat and organization | F/G see switching costs and aligned incentives; D/A see open standards and execution risk. | Moat remains Moderate and 7S Alignment Medium; incentives are supportive but not proof of outcomes. | Open-standard adoption, culture, incentives payouts, and international unit economics are **Unavailable Information**. |
+| Action at current price | Base-only interpretation favors buying; D/E require margin of safety. | Hold: dated price is below Base but above USD 9.61. This is a valuation-discipline resolution, not averaged price targets or personalized advice. | New operating evidence could change both scenarios and haircut. |
 
-**Strongest Hypothetical bear risks and falsification:**
+### Three valuation-critical challenges and material risks
 
-| Risk and transmission | Leading indicator | Severity / likelihood | Thesis-invalidating condition and evidence that would disprove the bear view |
-|---|---|---|---|
-| Largest-customer or top-five loss reduces revenue, utilization, and FCFF. | Customer concentration, recurring mix, revenue and FCFF versus scenario paths. | High / likelihood unavailable; Medium confidence. | Sustained customer loss plus FCFF below Base invalidates the ownership thesis; stable recurring revenue and Base-or-better FCFF despite concentration would weaken it. |
-| Scaled rivals and an open standard reduce switching costs, pricing, and margins. | EBIT margin, recurring mix, product adoption, and cash conversion. | High / elevated competitive pressure; likelihood not quantified. | Persistent margin erosion and Bear-or-worse cash flow indicate impairment; durable margins and retention would disprove it. |
-| Higher rates delay purchases and raise discount rates; terminal assumptions amplify the effect. | Purchasing delays, realized FCFF, WACC and terminal assumptions. | High valuation sensitivity / likelihood unavailable. | Bear FCFF with 11% WACC and 1.5% g yields USD 7.458422; sustained cash generation and less adverse assumptions would weaken this case. |
+1. **Demand, concentration, and competitive impairment.** Transmission: weaker industrial budgets or loss of a major customer reduces revenue; scaled competitors compress price/margin; FCFF and terminal NOPAT fall. Evidence: 22% largest-customer share, 46% top-five share, moderate cyclicality, and two gaining competitors. **[Verified Fact (Hypothetical Fixture).]** Leading indicators: customer concentration, renewals, bookings, and pricing (actual future values **Unavailable Information**). **Severity: High; likelihood: Medium.** Thesis invalidation: sustained recurring-revenue contraction with margin erosion. Bear case is disproved by resilient retention and margins through a downturn.
+2. **Switching-cost erosion / technological substitution.** Transmission: an open standard lowers retention and pricing, reducing growth, margins, and ROIC. The fixture says this could occur; its adoption and impact are **Speculation (Hypothetical)**. Leading indicators: open-standard adoption, churn, and win/loss rates (**Unavailable Information**). **Severity: High; likelihood: Medium.** Invalidation: structural switching-cost erosion plus weakening recurring economics. Bear case is disproved by durable retention despite interoperable alternatives.
+3. **Discount-rate and terminal-expectations risk.** Transmission: higher rates raise WACC and can delay customer purchases; long-duration Base/Bull values fall disproportionately. Evidence: explicit rate sensitivity and 82.63%/91.59% Base/Bull TV dependence. **[Verified Fact (Hypothetical Fixture) and Modeling Assumption (Hypothetical).]** Leading indicators: rates, purchasing delays, and realized terminal-relevant ROIC (**Unavailable Information**). **Severity: High; likelihood: Medium.** Invalidation: WACC approaches terminal growth or long-run economics fall below assumptions. This can cause permanent impairment if fundamentals deteriorate, or temporary volatility if cash flows remain intact.
 
-Price volatility alone is temporary and is not thesis deterioration. Sustained customer economics, cash-flow, or moat impairment can be permanent. No regulatory or geopolitical crisis is defined, so none is invented.
+Additional risks are refinancing/covenant uncertainty and international execution. Debt reduction is favorable, but maturity and covenant data are **Unavailable Information**; early international expansion is unproven **[Verified Fact (Hypothetical Fixture)]**. A mechanical stop-loss does not protect against fundamental impairment or gap risk.
 
 ## 6. McKinsey 7S Diagnosis
 
-All organizational statements are **Hypothetical Input** or explicitly identified inference; none is independently verified.
+The seven organizational ratings are analytical judgments (**Speculation (Hypothetical)**) based only on the cited fictional disclosures. **Confidence: Low** because independent organizational evidence is thin.
 
-| Dimension | Hypothetical evidence and assessment | Evidence limit |
+| Dimension | Rating | Evidence and limit |
 |---|---|---|
-| Strategy | Profitable recurring-revenue growth aligns with the business mix and ROIC/recurring-revenue incentives. | No detailed strategic milestones or outcomes. |
-| Structure | Centralized product organization and regional sales teams plausibly support product focus and local selling. | Reporting lines and decision effectiveness are undisclosed. |
-| Systems | Three-year ROIC and recurring-revenue targets support long-term measurement. | Operating systems and actual incentive outcomes are unavailable. |
-| Shared Values | Profitability and recurring growth are stated priorities; cultural alignment is only an inference. | No independent culture or employee-sentiment evidence. |
-| Style | Debt reduction alongside product investment is consistent with disciplined allocation. | Management behavior and decision style cannot be inferred reliably. |
-| Staff | No rating on talent depth or morale is possible. | Workforce, retention, and capability data are absent. |
-| Skills | Continued product investment supports an inference of product capability; international execution is unproven. | No skills inventory or expansion track record. |
+| Strategy | Moderate | Profitable recurring-revenue growth is stated and aligns with the business mix. **[Verified Fact (Hypothetical Fixture).]** Strategic budgets and segment priorities are **Unavailable Information**. |
+| Structure | Moderate | Centralized product organization and regional sales teams are disclosed. **[Verified Fact (Hypothetical Fixture).]** Reporting lines, spans, accountability, and decision speed are **Unavailable Information**. |
+| Systems | Moderate | Three-year ROIC and recurring-revenue incentive targets support measurement discipline. **[Verified Fact (Hypothetical Fixture).]** Operating systems, controls, and incentive outcomes are **Unavailable Information**. |
+| Shared Values | Monitor | The stated profitable-growth focus suggests capital discipline, but independently verified culture and employee sentiment are absent. **[Verified Fact (Hypothetical Fixture) and Unavailable Information.]** |
+| Style | Monitor | Debt reduction while investing in product is observable; leadership behavior and internal decision style are not. **[Verified Fact (Hypothetical Fixture) and Unavailable Information.]** |
+| Staff | Monitor | No workforce capability, retention, staffing, or independent sentiment evidence is supplied: **Unavailable Information**. |
+| Skills | Moderate | Continued product investment supports an operating capability inference, but international execution is explicitly unproven. **[Verified Fact (Hypothetical Fixture); inference: Speculation (Hypothetical).]** |
 
-- **7S Alignment: Medium.** Strategy, incentives, and stated structure are directionally aligned.
-- **Execution Support: Moderate.** Debt reduction and investment are favorable, but international readiness and systems evidence are weak.
-- **Long-Term Ownership Support: Monitor.** Organizational evidence is insufficient for Yes.
-- **Overall confidence: Low.** The dominant limitation is thin organizational evidence, not a verified organizational defect.
+**7S Alignment — Medium; Execution Support — Moderate; Long-Term Ownership Support — Monitor.** Alignment is directionally coherent, not proven effective. Incentive design cannot substitute for realized ROIC, retention, culture, or expansion outcomes.
 
 ## 7. Investment Execution Strategy
 
-This is a **Hypothetical, non-personalized framework**, not an instruction or allocation based on the reader's wealth. Tranches refer only to an **intended position**.
+This is a **non-personalized, conditional framework**, not advice to buy or sell. Investor wealth, income, liabilities, holdings, horizon, liquidity needs, and risk tolerance are **Unavailable Information**. Percentages below refer only to an **intended position**, never total wealth.
 
-- **Conditional staged entry:** 40% only while price is at or below USD 11.690256 and the Base thesis remains intact; 30% after evidence supports recurring-revenue durability and Base FCFF tracking; 30% after concentration/open-standard risks and debt/liquidity review are satisfactorily addressed. Do not add merely because price falls.
-- **Sizing principles:** Reduce intended size for forecast/terminal uncertainty, customer concentration, weak liquidity, portfolio correlation, or limited loss capacity. No exact capital amount is appropriate without investor context.
+- **Current condition:** At USD 10.50, Hold/watch rather than initiate a full position; the price exceeds the USD 9.61 buy threshold despite Base upside. **[Verified Fact and Modeling Assumption (Hypothetical).]**
+- **Initial tranche:** If price is at or below USD 9.61 **and** no thesis-invalidating evidence has emerged, consider **25% of an intended position**. A lower price alone is insufficient.
+- **Evidence tranche:** Add **25%** only after evidence supports recurring-revenue resilience, stable/improving margins, and no material concentration or financing deterioration. Required evidence is currently **Unavailable Information**.
+- **Confirmation tranche:** Add **25%** when realized incremental ROIC and cash conversion support Base economics, not merely revenue growth.
+- **Final tranche:** Reserve **25%** for a reassessed valuation with an intact margin of safety after organizational, competitive, and international-execution evidence improves.
+- **Sizing principles:** Reduce intended size for high uncertainty, weak liquidity, portfolio correlation, or limited loss capacity. Do not average down mechanically, and do not treat a stop-loss as fundamental or gap-risk protection.
 
-| Scenario | Short horizon | Medium horizon | Long horizon |
+| Horizon | Bear development | Base development | Bull development |
 |---|---|---|---|
-| Bear | Do not treat a lower price alone as an opportunity; reassess cash flow and impairment. | Pause further tranches if customer, margin, or FCFF deterioration persists. | Exit/reassess if moat or cash economics are permanently impaired. |
-| Base | Initial tranche is model-conditional at or below the margin-of-safety threshold. | Add only on evidence and valuation, not price momentum. | Retain only while ROIC, recurring economics, and balance-sheet resilience persist. |
-| Bull | Avoid extrapolating upside or chasing above assessed value. | Reassess expectations and concentration rather than assuming further multiple expansion. | Review whether reinvestment and moat durability still support compounding. |
+| Short term | Reassess thesis and financing; do not assume volatility is opportunity. | Hold/watch; require valuation and evidence conditions. | Avoid chasing price; recalculate value rather than extrapolate momentum. |
+| Medium term | Exit/avoid under a general framework if concentration loss, margin erosion, or ROIC impairment invalidates the thesis. | Add only under the staged evidence conditions above. | Retain only while valuation and reinvestment returns remain disciplined. |
+| Long term | Permanent impairment overrides a historical buy price. | Monitor retention, ROIC, debt, and moat durability. | Long-term ownership remains conditional on cash generation, not multiple expansion. |
 
-Reassess on missed scenario FCFF, sustained margin compression, loss of major-customer economics, adverse switching-cost evidence, or financing stress. Mechanical stop-losses do not protect against gap risk or fundamental impairment.
+Reassess immediately upon material customer loss, recurring-revenue contraction, sustained margin compression, adverse refinancing evidence, or open-standard-driven churn. Distinguish those developments from price volatility without fundamental change.
 
 ## 8. Manager Final Verdict
 
-**Manager — Investment Committee:** **Hypothetical Buy, Medium confidence**, because the dated USD 10.50 price is below the defensible controlled margin-of-safety threshold and the valuation gate has all required simplified inputs. This is not an average of agent votes: verified-within-fixture arithmetic and financial trends receive greatest weight, while unresolved forecast and organizational claims reduce confidence. The Bear case prevents a high-conviction conclusion.
+**Manager rating: Hold. Confidence: Medium.** The Manager gives the greatest weight to the internally consistent DCF, the dated hypothetical price, and directly relevant concentration/competitive evidence; less weight is given to unobservable culture and long-term outcomes. The decision is a synthesis, not an average of Agent votes.
 
-- **Scenario values:** Bear **USD 7.458422**; Base **USD 14.612820**; Bull **USD 23.557972**.
-- **20% margin-of-safety price:** **USD 11.690256**. It is not a guaranteed floor and exceeds Bear value.
+- **Scenario values:** **Bear USD 7.10; Base USD 14.78; Bull USD 26.05 per share.** **[Modeling Assumption (Hypothetical).]**
+- **Buy discipline:** **35% margin-of-safety haircut**, producing **USD 9.61**. Bear downside from that price is **26.09%**, and the price is **not a guaranteed floor**. **[Modeling Assumption (Hypothetical).]**
+- **Why Hold:** USD 10.50 offers modeled Base upside of 40.74%, but exceeds the buy threshold, carries 32.39% modeled Bear-scenario downside, and faces high terminal dependence and evidence gaps. **[Verified Fact and Modeling Assumption (Hypothetical).]**
 
-**Three central Hypothetical investment arguments:**
-1. Recurring revenue is 82%, supported by switching costs, which can aid cash-flow durability.
-2. EBIT margin improved to 15%, FY2025 ROIC was 18.75%, and debt declined while product investment continued.
-3. USD 10.50 is below both Base value and the 20% margin-of-safety threshold, providing model-conditional upside.
+### Three central investment arguments
 
-**Three major Hypothetical risks:**
-1. Customer concentration: the largest customer is 22% and the top five are 46% of revenue.
-2. Scaled competitors and a possible open standard could erode retention, pricing, and margins.
-3. DCF dependence on terminal value and fixed WACC/growth assumptions creates substantial valuation sensitivity.
+1. **Recurring economics:** 82% recurring revenue and switching costs can support retention and cash generation. **[Verified Fact (Hypothetical Fixture); forward inference: Speculation (Hypothetical).]**
+2. **Improving historical financial profile:** Revenue, EBIT margin, and simple FCF improved over FY2023–FY2025 while debt declined. **[Verified Fact (Hypothetical Fixture) and derived metrics.]**
+3. **Valuation optionality:** Base value exceeds the dated price, while disciplined entry below USD 9.61 provides a 35% margin to Base. **[Modeling Assumption (Hypothetical).]**
 
-**Three explicit Manager questions:**
-1. **Is this an excellent company?** **Not yet demonstrated.** It has good Hypothetical financial and recurring-revenue indicators, but moat durability, concentration, and organizational evidence prevent an unqualified excellent rating.
-2. **Is the stock attractively valued today?** **Yes, only within this Hypothetical model.** The 2026-01-20 price of USD 10.50 is below USD 11.690256 and Base value, although Bear downside remains material.
-3. **Is the company suitable for long-term ownership?** **Conditionally; Monitor.** Long-term ownership depends on recurring economics, ROIC, customer durability, and financing resilience—not on multiple expansion.
+### Three major risks
+
+1. **Customer concentration and cyclical demand** can transmit directly into revenue and margin weakness. **[Verified Fact (Hypothetical Fixture).]**
+2. **Competitive/open-standard erosion** can weaken switching costs, pricing, and moat durability. **[Verified Fact for competitors and open-standard possibility; impact: Speculation (Hypothetical).]**
+3. **Valuation duration and assumption risk:** Base/Bull terminal-value dependence and wide scenario dispersion can produce substantial loss if WACC or operating assumptions are wrong. **[Modeling Assumption (Hypothetical).]**
+
+### Three explicit Manager questions
+
+1. **Is this an excellent company?** **Not established.** It has good recurring economics and improving historical metrics, but concentration, competition, cyclicality, and evidence gaps prevent an excellent-company conclusion. **Confidence: Medium.**
+2. **Is the stock attractively valued today?** **Attractive relative to Base, but not enough for a Buy under this margin-of-safety discipline.** USD 10.50 is below Base USD 14.78 but above the USD 9.61 buy price; Bear downside remains material. **Confidence: Medium.**
+3. **Is the company suitable for long-term ownership?** **Monitor / conditional, not yet a clear Yes.** Suitability depends on durable retention, returns on capital, financing resilience, and execution evidence. **Confidence: Low.**
+
+These answers intentionally separate company quality, stock valuation, and long-term suitability.
 
 ## 9. Sources, Assumptions & Limitations
 
-- **Sole source:** `tests/fixtures/hypothetical-company.md`, a controlled fictional fixture. No external source, real filing, quotation, citation, or market data was used. Browsing was not performed.
-- **Evidence convention:** This report uses the framework's five categories with hypothetical qualifiers: **Verified Fact (Hypothetical Fixture)** for data verified only against the fictional fixture; **Modeling Assumption (Hypothetical)** for fixed test forecasts; **Unavailable Information** for gaps. No Analyst Estimate or Speculation is used. None of these means real-world verification.
-- **Execution method:** Agent A–G perspectives were simulated sequentially in **one model**. They were not independent models or independent executions. The Manager synthesized evidence and disagreements rather than averaging votes.
-- **Calculation verification:** Python independently recalculated all three DCF scenarios, EV-to-equity bridges, price comparisons, multiples, and every sensitivity cell. Results matched the fixture's six-decimal Bear/Base/Bull and margin-of-safety test oracles.
-- **Missing or limited evidence (Unavailable Information):** no external verification; no detailed segment/geography/product disclosures; no retention or customer-contract data; no debt-maturity, lease, pension, accounting-quality, net-income, book-equity, peer, future-dilution, workforce, culture, or international-execution evidence.
-- **Research boundary:** This is general, non-personalized controlled research. It does not consider any investor's finances, holdings, horizon, liquidity needs, or risk tolerance and is not personalized investment advice.
+- **Sole source:** `tests/fixtures/hypothetical-company.md`, controlled hypothetical fixture; FY2023–FY2025 historical data, fictional filing supplied 2026-01-15, research/price date 2026-01-20. No other source, browsing, or external fact was used.
+- **Evidence categories:** Historical and fixture-stated business facts are **Verified Fact (Hypothetical Fixture)** only within the fictional source. Forecast drivers and conditional DCF outputs are **Modeling Assumption (Hypothetical)**. No external **Analyst Estimate** is used. Interpretations about future durability or organizational effectiveness are **Speculation (Hypothetical)**. Missing filing, market, peer, accounting, debt, customer-cohort, and organizational details are **Unavailable Information**.
+- **Execution method:** All seven Agent perspectives, adversarial review, and Manager deliberation were simulated sequentially in **one model**; they are not independent models or executions. Calculations were derived with Python from the supplied driver formulas.
+- **Valuation limitations:** Outputs depend on hypothetical growth, margins, ROIC, tax, WACC, terminal growth, cash/debt bridge, and fixed diluted shares. The model does not forecast future issuance, buybacks, options, RSUs, convertibles, or bridge changes because they are **Unavailable Information**. Scenario values are estimates, not predictions or guaranteed outcomes.
+- **Evidence limitations:** The fixture is not externally verified. No real regulatory filing, audited statement, investor-relations transcript, peer set, current external market data, employee-sentiment evidence, or independent culture evidence was accessed. No regulatory or geopolitical crisis is defined; absence from the fixture is not evidence that such risks cannot exist.
+- **Research disclosure:** This is general, non-personalized research for a controlled behavioral evaluation, not investment advice or a real-company recommendation. The margin-of-safety buy price is conditional, **not a guaranteed floor**, and does not limit losses or guarantee protection from permanent impairment.

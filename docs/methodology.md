@@ -70,6 +70,18 @@ Intrinsic value per share = common equity value / diluted shares
 
 `WACC` must exceed `g`. Explain the cash-flow base, tax rate, reinvestment, cost of capital, terminal growth, and forecast horizon. If mid-year discounting is used, apply it consistently. Review terminal value as a share of EV and inspect implied terminal multiples.
 
+### Terminal-Year Normalization
+
+The terminal year is a continuation of the business, not a new company. Connect it to the explicit forecast:
+
+```text
+Terminal NOPAT = final explicit-year NOPAT × (1 + terminal growth)
+Terminal reinvestment rate = terminal growth / terminal ROIC
+Terminal FCFF = Terminal NOPAT × (1 - terminal reinvestment rate)
+```
+
+Never subtract this reinvestment twice. If implied terminal NOPAT diverges materially from the final explicit-year NOPAT carried forward, the model contains an unexplained normalization: either justify the transition (for example a stated mature-margin convergence) or revise the assumptions. Silent terminal-year profitability declines or improvements are modeling errors, not conservatism.
+
 ### FCFE Model
 
 FCFE belongs to equity holders and is discounted at the cost of equity. It produces equity value directly. Do not subtract net debt again and do not use WACC. Define borrowing and cash-flow treatment consistently.
@@ -88,7 +100,25 @@ Bear/Base/Bull cases must change underlying operating drivers, not just terminal
 Margin-of-safety buy price = Base intrinsic value per share × (1 - required margin of safety)
 ```
 
-Tie the haircut to forecast uncertainty, business cyclicality, financial leverage, governance, evidence quality, and downside dispersion. Cross-check the result against Bear value and relative valuation. The buy price is a decision threshold, not a guaranteed floor.
+The haircut is a research judgment, not a universal constant. Assess nine factors as Low / Medium / High concern with evidence:
+
+1. Cash-flow forecast uncertainty
+2. Terminal-value dependence (PV of TV as a share of EV)
+3. Financial leverage and refinancing risk
+4. Industry cyclicality
+5. Business-model and moat durability
+6. Customer or supplier concentration
+7. Management and organizational uncertainty
+8. Bear/Base/Bull valuation dispersion
+9. Quality, freshness, and completeness of evidence
+
+Select a band rather than a false-precision formula: roughly 10–20% for predominantly Low concerns, 20–30% for Medium, 30–40% for High. When several factors are High and evidence is poor, or material inputs are missing, withhold the precise buy price.
+
+Report three distinct quantities and never merge them:
+
+- **Safety margin to Base value:** discount of the buy price to Base intrinsic value.
+- **Bear-scenario downside:** percentage loss from the buy price to Bear value.
+- **Protection against permanent impairment:** conditional on the thesis, never guaranteed. The buy price is a decision threshold, not a floor and not a maximum-loss cap.
 
 ## 5. Bear Case and Invalidation
 

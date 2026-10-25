@@ -2,53 +2,54 @@
 
 ## Scope
 
-Validation distinguishes executable repository checks from host-specific behavior. A structural test is not evidence that Kimi Code, Codex, or another model produced a correct investment report.
+Validation distinguishes deterministic checks from behavioral artifacts and live-data tests. A static test is not evidence that an LLM produced a correct report, and committed behavioral outputs do not guarantee future model behavior.
 
-## Controlled Test Data
+## Anti-Contamination Design
 
-All financial inputs in `tests/fixtures/` are fictional and explicitly labeled. Expected DCF outputs are mathematical test oracles, not real-world estimates or recommendations.
+Behavioral fixtures contain **inputs only**. Expected valuation results live exclusively in `tests/oracle.py`, which is never supplied to a model under evaluation (enforced by the evaluation prompts). `test_fixture_does_not_leak_expected_answers` asserts that no oracle value appears in the fixture in 2/4/6-decimal renderings and that no margin-of-safety price is precomputed. Behavioral comparisons use tolerance-based numerical matching (0.5% relative for scenario values; 2% for model-chosen haircut arithmetic) instead of string matching, and `NegativeDetectionTests` prove the comparison catches 5% errors.
 
-## Executed Checks (2026-10-24)
+## What Changed in V1.1 and Why
+
+1. **Terminal-year discontinuity (V1.0 defect).** The V1.0 Base case implied Year 5 NOPAT of ~157.0 from its drivers, but its fixed terminal FCFF implied terminal NOPAT of ~143.5 — an unexplained ~10.9% profitability decline. V1.1 derives FCFF from drivers (`FCFF = NOPAT × (1 − growth/ROIC)`) and connects terminal economics explicitly (`Terminal NOPAT = Y5 NOPAT × (1+g)`, reinvestment `= g/terminal ROIC`). Base intrinsic value changed from 14.612820 to **14.777213**; Bear 7.458422 → **7.098724**; Bull 23.557972 → **26.052694**. This is an economic-consistency correction, not price tuning.
+2. **Margin-of-safety discipline.** The universal 20% haircut was replaced by a nine-factor assessment mapped to bands (10–20% / 20–30% / 30–40% / withhold), with mandatory Bear cross-check and explicit separation of safety margin to Base value, Bear downside at the buy price, and non-guaranteed permanent-impairment protection.
+3. **Test architecture.** Tests split into static (`test_repository.py`), numerical (`test_financial_math.py` + `tests/oracle.py`), and behavioral artifacts (`test_behavioral_outputs.py`). GitHub Actions runs the deterministic suite with no secrets, paid APIs, or third-party dependencies.
+
+## Executed Checks (2026-10-25, V1.1)
 
 | Check | Method | Result |
 |---|---|---|
-| Repository structure, required files, frontmatter, name/directory match | `tests/test_repository.py` | **Pass** |
-| Seven Agents A–G, Manager, five stages preserved | `tests/test_repository.py` | **Pass** |
-| Full Research nine-section structure in controlled output | Behavioral fixture run + unit test | **Pass** |
-| Quick Price Mode: exactly two lines, English and Simplified Chinese | Behavioral fixture runs + unit test | **Pass** |
-| Missing-data fixture: refusal without invented numbers | Behavioral fixture run + unit test | **Pass** |
-| Standalone Prompt works without SKILL.md | Separate agent context using only `prompts/equity-research.md` | **Pass** |
-| English default; explicit Chinese request produces Chinese | Behavioral fixture runs | **Pass** |
-| DCF Bear/Base/Bull reconciliation (7.458422 / 14.612820 / 23.557972) | Independent Python recalculation | **Pass** |
-| Margin-of-safety price (14.612820 × 0.8 = 11.690256) | Independent Python recalculation | **Pass** |
-| 25-cell WACC × terminal-growth sensitivity table | Cell-by-cell recalculation against report | **Pass** |
-| WACC derivation (80% equity + 20% after-tax debt) and terminal reinvestment (g/ROIC = 20%) | Unit test against fixture | **Pass** |
-| FCFE has no net-debt bridge; invalid terminal spread rejected | Unit tests | **Pass** |
-| Standalone Prompt body identical to SKILL.md body | Unit test | **Pass** |
-| Relative Markdown links resolve | Unit test | **Pass** |
-| Mermaid architecture diagram syntax | `mermaid.parse` (mermaid 12.2.0, jsdom) — parsed as flowchart-v2; five stages present | **Pass** |
-| Agent Skills specification validation | Official `skills-ref validate` (agentskills/agentskills @ main) | **Pass** — "Valid skill" |
-| Skill properties readable | Official `skills-ref read-properties` | **Pass** |
-| Independent methodology audit | Read-only audit agent; all Critical/High findings fixed and re-verified | **Pass after fixes** |
+| Repository structure, frontmatter, seven Agents, Manager, five stages, modes, language rules | `test_repository.py` | **Pass** |
+| Fixture contains no oracle answers | `test_fixture_does_not_leak_expected_answers` | **Pass** |
+| Skill ↔ standalone Prompt verbatim synchronization | `test_standalone_prompt_contains_complete_skill_body` | **Pass** |
+| Relative Markdown links; Mermaid structure (5 stages, A–G, Manager) | `test_repository.py` | **Pass** |
+| Mermaid syntax | `mermaid.parse` (mermaid 12.2.0 + jsdom) → flowchart-v2 | **Pass** |
+| Skill format | Official `skills-ref validate` (agentskills/agentskills @ main) | **Pass** |
+| WACC derivation (80/20 structure), driver-derived FCFF, Bear capital release | `test_financial_math.py` | **Pass** |
+| Oracle stability: Bear 7.098724 / Base 14.777213 / Bull 26.052694 | `test_scenario_values_are_stable` | **Pass** |
+| Terminal continuity = 0 for all scenarios; V1.0 discontinuity (~10.9%) reproduced and detected; reinvestment double-count rejected | `TerminalConsistencyTests` | **Pass** |
+| Edge cases: WACC ≤ g rejected; FCFE discount-rate guard; FCFF/FCFE pairing; bridge sign/double-count errors; SBC double counting; currency/share-class mismatch; invalid haircuts | `EdgeCaseTests` | **Pass** |
+| Oracle comparison detects wrong arithmetic | `NegativeDetectionTests` | **Pass** |
+| Behavioral artifacts vs oracle (tolerance): full report values, justified haircut arithmetic, Bear cross-check, Quick ZH/EN two-line arithmetic consistency, missing-data refusal | `test_behavioral_outputs.py` | **Pass** |
+| Full suite | `python -m unittest discover -s tests -v` | **37 tests, all pass** |
 
-### Reproduce
+## Behavioral Runs Actually Executed
 
-```bash
-python3 -m unittest discover -s tests -v   # 15 tests
-```
+Four separate agent-context runs on 2026-10-25 used the input-only fixture and no oracle access:
 
-## Behavioral Test Method
+1. **Full Research (English):** independently derived Bear 7.10 / Base 14.78 / Bull 26.05 (within 0.5% of oracle), chose a justified **35% haircut** (High-concern band), buy price USD 9.61, Bear downside 26.09%, rating **Hold** (price 10.50 above the buy threshold).
+2. **Quick Price (Simplified Chinese):** exactly two lines; independently derived Base USD 14.78, chose **25% haircut** (Medium band), price USD 11.08 — arithmetic consistent.
+3. **Standalone Prompt (English):** identical two-line result without SKILL.md access.
+4. **Missing data:** one-sentence refusal listing missing valuation inputs; no fabricated numbers; did not cite the absent market price as a DCF input.
 
-Four controlled behavioral runs were executed in separate agent contexts using only the fictional fixtures: English Full Research, Chinese Quick Price, missing-data refusal, and standalone-Prompt Quick Price. Outputs live in `tests/outputs/`. These test instruction-following and arithmetic, not live data retrieval. An independent audit pass reviewed the outputs; its findings (evidence-label misuse, missing WACC/driver support, confidence-scale violation, missing Stage 2 in the diagram, weak sensitivity verification) were fixed and covered by new tests.
+**Observed variance:** the two Quick runs chose 25% while the Full run chose 35%. Both are within the methodology's justified bands and arithmetically consistent; the haircut is a research judgment, and outputs correctly state their own reasoning. This variance is expected behavior, not a test failure.
 
-## Not Executed
+## Real-Company Smoke Test (Not in CI)
 
-- **Native Kimi Code CLI discovery and `/skill:equity-research` invocation:** the CLI is not installed in this environment. Conformance was verified against the official Kimi Code documentation (directory form, required `name`/`description`, `.agents/skills/` project scope, `/skill:` syntax) instead.
-- **Native Codex CLI discovery and `$equity-research` invocation:** the CLI is not installed in this environment. Conformance was verified against OpenAI's official Build Skills documentation.
-- **Live market-data retrieval:** the Skill does not claim to retrieve data; no live-data test was run or implied.
-- **GitHub-rendered Mermaid:** syntax was validated with the official Mermaid parser; rendering on GitHub's frontend was not separately verified.
+`tests/smoke/sec_smoke.py` fetched official SEC XBRL company facts for Microsoft Corp (CIK 0000789019) on 2026-10-25: FY2026 (2025-07-01 to 2026-06-30) revenue USD 331,839,000,000 and net income USD 133,749,000,000 from 10-K filed 2026-07-29 (accession 0001193125-26-323660). The test validates source retrieval, fiscal-year alignment (June FY ≠ calendar year), and citation integrity (accession numbers). No market price was retrieved, so per the price gate **no rating or target was produced** — by design. Output: `tests/smoke/real-company-smoke.md`. SEC rejected the repository's first User-Agent (noreply.github.com domain); the working UA is documented in the script.
 
-## Known Limitations
+## Not Executed / Limitations
 
-- Simulated perspectives in one model do not create statistical independence.
-- Behavioral tests use one capable LLM environment; other models may follow the instructions with different fidelity.
+- **Native Kimi Code CLI and Codex CLI loading remain untested** — neither client is installed in this environment. Conformance relies on official documentation plus `skills-ref`.
+- Behavioral artifacts are point-in-time LLM outputs; they do not guarantee future model behavior.
+- GitHub-rendered Mermaid was not separately verified (parser-level validation only).
+- The smoke test's figures reflect the access date and will change as new filings appear.

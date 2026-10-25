@@ -165,7 +165,16 @@ Run the repository checks with Python 3.10+; no third-party packages are require
 python3 -m unittest discover -s tests -v
 ```
 
-The tests cover required architecture, Skill/Prompt synchronization, local Markdown links, Mermaid structure, and controlled DCF mathematics using hypothetical inputs. They do not prove live market-data retrieval or native behavior in every host. See [Validation](docs/validation.md) for executed results and untested behavior.
+The same deterministic suite runs in GitHub Actions on every push and pull request — no secrets, paid APIs, or external services.
+
+Tests are deliberately separated:
+
+- **Static:** required architecture, Skill/Prompt synchronization, Markdown links, Mermaid structure, and an anti-leakage check that no expected valuation appears in the behavioral fixture.
+- **Numerical:** driver-based DCF oracle, terminal-year continuity (including a reproduced V1.0 discontinuity), margin-of-safety arithmetic, and edge cases such as WACC ≤ g, FCFF/FCFE mismatch, equity-bridge errors, SBC double counting, and currency/share-class mismatches.
+- **Behavioral artifacts:** committed LLM outputs compared to the independent oracle with tolerance-based checks. Behavioral fixtures contain inputs only; expected values live in `tests/oracle.py` and are never supplied to the model under evaluation.
+- **Real-company smoke tests:** isolated under `tests/smoke/`, excluded from CI because external data changes over time.
+
+Static tests do not prove runtime LLM behavior, and behavioral artifacts do not guarantee future outputs. See [Validation](docs/validation.md) for executed results and untested behavior.
 
 ## Known Limitations
 
