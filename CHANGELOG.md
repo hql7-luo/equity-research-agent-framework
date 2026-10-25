@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. The format follows Keep a Changelog principles, and versions use Semantic Versioning.
 
+## [1.1.2] - 2026-10-25
+
+### Fixed
+
+- **Evidence misclassification:** model-derived intrinsic values and margin-of-safety prices were labeled `Analyst Estimate (Hypothetical)` in the controlled report. The Skill now reserves `Analyst Estimate` for externally attributed forecasts with a named provider and date; model-derived valuations are `Modeling Assumption / Derived Valuation`. The Manager's valuation summary block must carry that tag. The controlled artifact was corrected; no numbers changed.
+- **Evidence gate vs margin-of-safety ambiguity:** the previous wording could imply that choosing a larger haircut substitutes for missing evidence. The Skill now states explicitly that a haircut applies only after the valuation gate is satisfied, that missing critical inputs require withholding the price, and that a fully specified hypothetical fixture may produce an explicitly conditional valuation labelled Modeling Assumption / Derived Valuation — an exception that does not extend to incomplete real-world research.
+
+### Tests
+
+- Added regression tests that the classification and gate rules exist in both SKILL.md and the standalone Prompt.
+- Added behavioral checks that valuation fields are tagged Modeling Assumption / Derived Valuation and never Analyst Estimate, with a negative test proving an Analyst-Estimate-tagged valuation field is rejected.
+- 45 tests pass.
+
 ## [1.1.1] - 2026-10-25
 
 ### Fixed

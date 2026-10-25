@@ -16,9 +16,10 @@ Higher-quality sources take precedence when figures conflict, but differences in
 
 - **Verified Fact:** directly supported by an identified source and period.
 - **Analyst Estimate:** an external forecast attributed to its provider and date.
-- **Modeling Assumption:** an input chosen for this analysis and disclosed as such.
-- **Speculation:** an unverified possibility; never a factual foundation.
+- **Modeling Assumption:** an input chosen for this analysis and disclosed as such.- **Speculation:** an unverified possibility; never a factual foundation.
 - **Unavailable Information:** a material item not found or not disclosed.
+
+**Classification discipline:** `Analyst Estimate` applies only to an externally attributed forecast with a named provider and date. Model-derived intrinsic values, scenario values, sensitivity outputs, and margin-of-safety prices are `Modeling Assumption / Derived Valuation`, never Analyst Estimates. Ratios computed from filings are derived metrics from Verified Facts.
 
 Every material time series needs units, currency, reporting period, and accounting basis. Every market comparison needs a price reference date. A report date is not a substitute for a price date.
 
@@ -128,6 +129,8 @@ Select a band rather than a false-precision formula: roughly 10–20% for predom
 Anchors keep the band reproducible: terminal dependence >75% of EV is High (60–75% Medium); net debt/EBITDA >3.5x High (2.0–3.5x Medium); largest customer >20% of revenue High (10–20% Medium); scenario dispersion (Bull−Bear)/Base >100% High (50–100% Medium); single-source, stale, or materially incomplete evidence is High. Count High factors: 3+ → 30–40% band; 1–2 → 20–30%; 0 → 10–20%. Use the band reference value (35/25/15%) unless a specific within-band reason is documented.
 
 **Mode consistency:** the assessment depends on inputs and evidence, not on output length. Identical inputs must yield identical factor ratings, band, and haircut in Full Research and Quick Price. Use the band reference value (15% / 25% / 35%) unless the factor table documents a specific reason to move within the band. Any divergence between modes requires an identifiable difference in assumptions or evidence.
+
+**Haircut versus evidence gate:** a haircut is an uncertainty adjustment, not a substitute for missing evidence. Withhold the precise buy price when critical inputs are missing or unsupported, or when the Bear/Base/Bull range cannot be defended. Use the 35% band when inputs are complete and scenarios are defensible but uncertainty is high. A fully specified hypothetical fixture may produce an explicitly conditional valuation labelled Modeling Assumption / Derived Valuation; incomplete real-world research cannot bypass the gate by choosing a larger haircut.
 
 Report three distinct quantities and never merge them:
 

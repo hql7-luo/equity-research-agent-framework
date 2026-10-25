@@ -15,11 +15,11 @@
 
 | Item | Value | Label |
 |---|---:|---|
-| Bear intrinsic value / share | USD 6.59 | Analyst Estimate (Hypothetical) |
-| Base intrinsic value / share | USD 14.67 | Analyst Estimate (Hypothetical) |
-| Bull intrinsic value / share | USD 25.03 | Analyst Estimate (Hypothetical) |
-| Margin-of-safety haircut | 35% (High band) | Analyst Estimate (Hypothetical) |
-| Margin-of-safety buy price | USD 9.54 | Analyst Estimate (Hypothetical) |
+| Bear intrinsic value / share | USD 6.59 | Modeling Assumption (Hypothetical) — Derived Valuation |
+| Base intrinsic value / share | USD 14.67 | Modeling Assumption (Hypothetical) — Derived Valuation |
+| Bull intrinsic value / share | USD 25.03 | Modeling Assumption (Hypothetical) — Derived Valuation |
+| Margin-of-safety haircut | 35% (High band) | Modeling Assumption (Hypothetical) — Derived Valuation |
+| Margin-of-safety buy price | USD 9.54 | Modeling Assumption (Hypothetical) — Derived Valuation |
 | Market price (2026-01-20) | USD 10.50 | Verified Fact (Hypothetical Fixture) |
 | Price vs buy price | +10.1% above | Derived |
 
@@ -35,7 +35,7 @@
 
 ## 2. Structured Financial Data
 
-All historical figures are **Verified Fact (Hypothetical Fixture)** — verified only against this controlled fictional source. All derived metrics are **Analyst Estimate (Hypothetical)**, computed by me with Python from fixture inputs. All forecasts are **Modeling Assumption (Hypothetical)**.
+All historical figures are **Verified Fact (Hypothetical Fixture)** — verified only against this controlled fictional source. All derived metrics are **Modeling Assumption (Hypothetical) — Derived Valuation**, computed by me with Python from fixture inputs. All forecasts are **Modeling Assumption (Hypothetical)**.
 
 ### 2.1 Reported historicals (USD millions, fiscal years ended 31 December)
 
@@ -241,13 +241,13 @@ Nine factors, per the Skill's required framework. Ratings are Low / Medium / Hig
 | # | Factor | Concern | Evidence | Label |
 |---|---|---|---|---|
 | 1 | Cash-flow forecast uncertainty | **High** | Base requires margin expansion 15.0% → 15.5% *and* a reinvestment rate of 38–62% against 22.2% realized; forecast incremental ROIC is 4x–8x below realized. Two independent driver shifts must both land. | Modeling Assumption (Hypothetical) |
-| 2 | Terminal-value dependence | **High** | PV of TV is 83.2% of Base EV and 95.2% of Bull EV. Value is overwhelmingly a Year-6 assumption. | Analyst Estimate (Hypothetical) |
+| 2 | Terminal-value dependence | **High** | PV of TV is 83.2% of Base EV and 95.2% of Bull EV. Value is overwhelmingly a Year-6 assumption. | Modeling Assumption (Hypothetical) — Derived Valuation |
 | 3 | Financial leverage and refinancing risk | **Low** | Net debt 80; net debt/EBITDA 0.33x on Year 5 Base EBITDA; debt reduced 210 → 200 → 205 → 200 while product investment continued. No maturity schedule disclosed. | Verified Fact (Hypothetical Fixture) |
 | 4 | Industry cyclicality | **Medium** | Explicitly "moderately cyclical"; customer budgets track industrial capex cycles; higher rates delay customer purchasing. No downturn history beyond 3 years supplied. | Verified Fact (Hypothetical Fixture) |
 | 5 | Business-model and moat durability | **Medium** | High switching costs support retention, but "a new open-standard product could reduce them"; two scaled competitors gaining share in lower-priced segments. 82% recurring revenue supports durability. | Verified Fact (Hypothetical Fixture) / Speculation (Hypothetical) |
 | 6 | Customer or supplier concentration | **High** | Largest customer 22% of revenue; top five 46%. No contract terms, no retention rate, no churn data. A single loss is thesis-invalidating. | Verified Fact (Hypothetical Fixture) |
 | 7 | Management and organizational uncertainty | **Medium** | ROIC and recurring-revenue linked three-year incentives and deleveraging are favorable; international expansion early with "unproven" execution; no verified culture or employee evidence. | Verified Fact (Hypothetical Fixture) / Unavailable Information |
-| 8 | Bear/Base/Bull valuation dispersion | **High** | 6.59 / 14.67 / 25.03; Bull/Base 1.71x, Base/Bear 2.23x. Drivers move together, so the scenarios are not independent draws. | Analyst Estimate (Hypothetical) |
+| 8 | Bear/Base/Bull valuation dispersion | **High** | 6.59 / 14.67 / 25.03; Bull/Base 1.71x, Base/Bear 2.23x. Drivers move together, so the scenarios are not independent draws. | Modeling Assumption (Hypothetical) — Derived Valuation |
 | 9 | Quality, freshness, completeness of evidence | **High** | Single synthetic fixture; no segment, customer, churn, D&A forecast, peer, or organizational disclosures; one 2.50 reconciliation residual unexplained; no external verification possible by construction. | Unavailable Information |
 
 **Band selection.** Five factors rate High, three Medium, one Low. The profile is *predominantly High*, which places this in the **30–40%** band. The Skill's mode-consistency rule requires the band reference value — **35%** — unless the factor table documents a specific reason to move within the band. I considered moving toward 30% on the strength of factor 3 (Low leverage) and the fact that the Bear case is not a solvency case. I decline to do so, for one documented reason: **factors 2 and 9 are jointly decisive**. Terminal value is 83% of Base EV and 95% of Bull EV, and the entire evidence base is a single unverifiable fixture with no churn, contract-term, or segment data. When the two largest sources of potential error are the terminal assumption and the evidence itself, a 30% haircut would be false precision, and moving to 40% would imply a confidence in the downside that the evidence does not support either. **35% is used. There is no deviation from the band reference value, and no Full-versus-Quick inconsistency: identical inputs, identical ratings, identical haircut.**
@@ -290,7 +290,7 @@ Porter's Five Forces, on fixture evidence only: rivalry Medium-High (two scaled 
 
 **Confidence: Medium.** **Unresolved:** the 2.50 reconciliation residual; the absence of receivables, deferred revenue, goodwill, and tax-paid detail; whether the FY2025 margin level is normalized or peak.
 
-**Label:** Verified Fact (Hypothetical Fixture) for reported lines; Analyst Estimate (Hypothetical) for all ratios.
+**Label:** Verified Fact (Hypothetical Fixture) for reported lines; Modeling Assumption (Hypothetical) — Derived Valuation for all ratios.
 
 ### Agent C — Valuation Modeling
 
@@ -302,7 +302,7 @@ Porter's Five Forces, on fixture evidence only: rivalry Medium-High (two scaled 
 
 **Confidence: Medium** on Base, **Low** on Bull given the 95.2% terminal share and negative Year-1 FCFF.
 
-**Label:** Analyst Estimate (Hypothetical) / Modeling Assumption (Hypothetical).
+**Label:** Modeling Assumption (Hypothetical) — Derived Valuation / Modeling Assumption (Hypothetical).
 
 ### Agent D — Bear Case & Risk Officer
 
@@ -326,7 +326,7 @@ Second risk: customer concentration. Loss of the 22% customer removes roughly a 
 
 **Confidence: Medium.**
 
-**Label:** Analyst Estimate (Hypothetical).
+**Label:** Modeling Assumption (Hypothetical) — Derived Valuation.
 
 ### Agent F — Buffett-Style Review
 
@@ -341,7 +341,7 @@ Second risk: customer concentration. Loss of the 22% customer removes roughly a 
 | Suitability for a 10-year hold | **Conditional** | Would require retention disclosure and evidence the open-standard threat is contained. On current evidence: not yet. |
 | Attractiveness if the market closed for 5 years | **Adequate** | Five years of Base FCFF totals 345.27 against a 1,050.00 market equity value — an owner relying purely on business cash generation would need the full terminal economics, not the explicit period, to be made whole. That is a demanding dependence on Year 6+. |
 
-**Confidence: Medium.** **Label:** Analyst Estimate (Hypothetical) for ratings; Verified Fact (Hypothetical Fixture) for the underlying facts.
+**Confidence: Medium.** **Label:** Modeling Assumption (Hypothetical) — Derived Valuation for ratings; Verified Fact (Hypothetical Fixture) for the underlying facts.
 
 ### Agent G — Organizational Diagnosis (McKinsey 7S)
 
@@ -470,11 +470,11 @@ The Manager's synthesis is not an average of seven votes, because six of the sev
 
 ### Valuation summary (answers of record)
 
-Bear value per share: $6.59
-Base value per share: $14.67
-Bull value per share: $25.03
-Margin-of-safety haircut: 35%
-Margin-of-safety buy price: $9.54
+Bear value per share: $6.59 — Modeling Assumption / Derived Valuation
+Base value per share: $14.67 — Modeling Assumption / Derived Valuation
+Bull value per share: $25.03 — Modeling Assumption / Derived Valuation
+Margin-of-safety haircut: 35% — Modeling Assumption
+Margin-of-safety buy price: $9.54 — Derived Valuation
 
 ---
 
@@ -493,7 +493,7 @@ Margin-of-safety buy price: $9.54
 | Label | Count of material uses | Examples |
 |---|---:|---|
 | **Verified Fact (Hypothetical Fixture)** | 21 | FY2023–FY2025 revenue, EBIT, D&A, OCF, capex, ΔNWC, cash, debt, shares, SBC; 25% tax rate; 600 average invested capital; 82% recurring mix; 22%/46% concentration; $5.0bn TAM at 4%; two scaled competitors; high switching costs; open-standard threat; moderate cyclicality; strategy statement; three-year ROIC incentive plan; centralized product/regional sales structure; debt 210 → 200; unproven international expansion; market price $10.50 |
-| **Analyst Estimate (Hypothetical)** | 14 | NOPAT path; 60.0% and 68.2% historical incremental ROIC; 18.75% FY2025 ROIC; all three DCF scenario values; terminal values and terminal shares of EV; sensitivity grid; implied EV/EBITDA and P/E; reverse-DCF implied WACC of 11.09%; buy price |
+| **Modeling Assumption (Hypothetical) — Derived Valuation** | 14 | NOPAT path; 60.0% and 68.2% historical incremental ROIC; 18.75% FY2025 ROIC; all three DCF scenario values; terminal values and terminal shares of EV; sensitivity grid; implied EV/EBITDA and P/E; reverse-DCF implied WACC of 11.09%; buy price |
 | **Modeling Assumption (Hypothetical)** | 9 | Revenue growth paths; EBIT margin paths; incremental and terminal ROIC by scenario; terminal growth; 80/20 capital structure; cost of equity and debt; flat $30 D&A for the EBITDA cross-check only; year-end discounting |
 | **Speculation (Hypothetical)** | 5 | Open-standard transmission chain to margin; management "style" inferred from two balance-sheet data points; share-gain requirement implied by 8% growth in a 4% market; competitive response of the two scaled competitors; durability of switching costs |
 | **Unavailable Information** | 11 | Peer multiples and any comparables; float, volume, market cap; customer contract terms and retention/churn rates; segment-level margins; D&A forecast; debt maturity schedule; supplier power; employee sentiment and headcount; ROIC definition inside the incentive plan; probability of open-standard adoption; the 2.50 cash-flow reconciliation residual |

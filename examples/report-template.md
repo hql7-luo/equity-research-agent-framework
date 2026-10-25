@@ -149,12 +149,12 @@
 ## 8. Manager Final Verdict
 
 - **Rating:** [ ] with [confidence] confidence.
-- **Valuation Summary (answers of record):**
-  - `Bear value per share:` [ ]
-  - `Base value per share:` [ ]
-  - `Bull value per share:` [ ]
-  - `Margin-of-safety haircut:` [band and reference or justified deviation]
-  - `Margin-of-safety buy price:` [or "Not Rated — insufficient evidence: reason"]
+- **Valuation Summary (answers of record; tag all fields Modeling Assumption / Derived Valuation — never Analyst Estimate):**
+  - `Bear value per share:` [ ] — Modeling Assumption / Derived Valuation
+  - `Base value per share:` [ ] — Modeling Assumption / Derived Valuation
+  - `Bull value per share:` [ ] — Modeling Assumption / Derived Valuation
+  - `Margin-of-safety haircut:` [band and reference or justified deviation] — Modeling Assumption
+  - `Margin-of-safety buy price:` [or "Not Rated — insufficient evidence: reason"] — Derived Valuation
 - **Three central arguments:** (1) [ ] (2) [ ] (3) [ ].
 - **Three major risks:** (1) [ ] (2) [ ] (3) [ ].
 - **Is this an excellent company?** [Answer and evidence.]

@@ -18,6 +18,7 @@ This is a multi-perspective workflow, not proof of independent agents. If the ho
 - Never invent financial data, prices, sources, quotations, citations, analyst estimates, organizational facts, or tool access.
 - Prefer regulatory filings, audited statements, investor relations, and earnings calls over secondary sources.
 - Label material claims as **Verified Fact**, **Analyst Estimate**, **Modeling Assumption**, **Speculation**, or **Unavailable Information**.
+- **Classification rule:** `Analyst Estimate` is reserved for an externally attributed forecast with a named provider and date. Model-derived intrinsic values, scenario values, sensitivity outputs, and margin-of-safety prices are **Modeling Assumption / Derived Valuation**, never `Analyst Estimate`. Ratios computed from reported data are derived metrics from Verified Facts, not Analyst Estimates.
 - Attach source, publication date or access date, reporting period, units, currency, and accounting basis to material data. Keep market price and valuation dates aligned.
 - Distinguish company-reported figures from derived figures. Show calculations for derived metrics.
 - Disclose unavailable browsing, stale inputs, conflicting sources, missing periods, and other limitations before drawing conclusions.
@@ -63,7 +64,7 @@ Use secondary claims cautiously and identify when the original source still need
 - **Company-quality gate:** Proceed qualitatively with public evidence, but lower confidence when segment, customer, or organizational disclosures are missing.
 - **Valuation gate:** A precise DCF requires, at minimum, a defensible cash-flow base, forecast drivers, discount-rate inputs, terminal assumptions, net-debt or equity-bridge inputs where applicable, and diluted shares. Use only conditional scenarios if one noncritical input is missing and the assumption is defensible.
 - **Price gate:** A current attractiveness rating requires a dated market price. Without one, provide intrinsic scenarios but do not claim the stock is cheap or expensive today.
-- **Failure gate:** If critical inputs are missing or internally inconsistent, withhold the precise valuation, margin-of-safety price, or rating. Name the missing inputs instead of substituting invented values.
+- **Failure gate:** If critical inputs are missing or internally inconsistent, withhold the precise valuation, margin-of-safety price, or rating. Name the missing inputs instead of substituting invented values. A larger margin-of-safety haircut does **not** cure missing inputs.
 
 ## Stage 2 — Seven Independent Research Perspectives
 
@@ -177,6 +178,8 @@ Use the assessment to select a haircut band, not a point estimate: roughly **10�
 
 **Band selection:** count High factors — **3 or more → 30–40% band; 1–2 → 20–30%; 0 → 10–20%**. The count selects the band; the precise haircut still requires judgment and defaults to the band reference value (35% / 25% / 15%) for cross-mode consistency.
 
+**Haircut versus evidence gate:** a haircut is an uncertainty adjustment applied only after the valuation gate is satisfied. Withhold the precise buy price when critical inputs are missing or unsupported, or when the Bear/Base/Bull range cannot be defended. When inputs are complete and all scenarios are defensible but uncertainty is high (3+ High factors), use the 35% band and label the result conditional. A fully specified hypothetical fixture may produce an explicitly conditional valuation labelled **Modeling Assumption / Derived Valuation**; that exception does not permit incomplete real-world research to bypass the gate by choosing a larger haircut.
+
 **Mode consistency rule:** the margin-of-safety assessment is a function of inputs and evidence, not of output verbosity. For identical inputs, assumptions, and evidence, Full Research and Quick Price must use the same factor ratings, the same band, and the same haircut; a different result requires an identifiable difference in assumptions or evidence, never output mode alone. To keep results reproducible without false precision, use the band reference value — **15%** for the Low band, **25%** for Medium, **35%** for High — unless the factor table documents a specific reason to move within the band. Quick Price Mode performs the same nine-factor assessment internally; it merely reports less.
 
 Always distinguish three different quantities:
@@ -273,7 +276,7 @@ Use these nine sections without redundant repetition:
 5. **Key Disagreements & Bear Case** — adversarial findings, triggers, and invalidation conditions.
 6. **McKinsey 7S Diagnosis** — the seven dimensions, three ratings, and evidence limits.
 7. **Investment Execution Strategy** — conditional entries, tranches, reassessment, and horizon-based actions.
-8. **Manager Final Verdict** — rating rationale, scenario values, three arguments, three risks, and the three explicit questions. Include a machine-checkable summary block with exactly these labels: `Bear value per share:`, `Base value per share:`, `Bull value per share:`, `Margin-of-safety haircut:`, and `Margin-of-safety buy price:` (or `Not Rated — insufficient evidence:` with the reason). These labeled fields are the report's valuation answers of record.
+8. **Manager Final Verdict** — rating rationale, scenario values, three arguments, three risks, and the three explicit questions. Include a machine-checkable summary block with exactly these labels: `Bear value per share:`, `Base value per share:`, `Bull value per share:`, `Margin-of-safety haircut:`, and `Margin-of-safety buy price:` (or `Not Rated — insufficient evidence:` with the reason). Tag these valuation answers **Modeling Assumption / Derived Valuation**, never Analyst Estimate. These labeled fields are the report's valuation answers of record.
 9. **Sources, Assumptions & Limitations** — traceable sources, evidence labels, execution method, missing data, and non-personalized research disclosure.
 
 ### Quick Price Mode

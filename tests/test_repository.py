@@ -71,6 +71,18 @@ class RepositoryStructureTests(unittest.TestCase):
             self.assertIn("withhold", lowered, path.name)
             self.assertIn("not a guaranteed floor", lowered, path.name)
 
+    def test_evidence_labeling_and_gate_rules_present(self):
+        for path in (SKILL, PROMPT):
+            text = path.read_text(encoding="utf-8")
+            lowered = text.lower()
+            self.assertIn("reserved for an externally attributed forecast", lowered, path.name)
+            self.assertIn("derived valuation", lowered, path.name)
+            self.assertIn("never `analyst estimate`", lowered, path.name)
+            self.assertIn("cure missing inputs", lowered, path.name)
+            self.assertIn("haircut versus evidence gate", lowered, path.name)
+            self.assertIn("incomplete real-world research", lowered, path.name)
+            self.assertIn("fully specified hypothetical fixture", lowered, path.name)
+
     def test_standalone_prompt_contains_complete_skill_body(self):
         skill_body = SKILL.read_text(encoding="utf-8").split("---", 2)[2].strip()
         prompt = PROMPT.read_text(encoding="utf-8")

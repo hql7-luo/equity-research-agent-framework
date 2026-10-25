@@ -74,6 +74,23 @@ def parse_quick(text: str) -> dict:
     return {"buy_price": price, "base": base, "haircut": implied}
 
 
+def valuation_block(text: str) -> str:
+    """Return the labeled valuation summary block, or raise if absent."""
+    start = text.find("Bear value per share:")
+    end = text.find("Margin-of-safety buy price:")
+    if start < 0 or end < 0:
+        raise AssertionError("valuation summary block incomplete")
+    return text[start:end + 60]
+
+
+def check_valuation_labeling(text: str) -> bool:
+    """True only if valuation fields are tagged modeling/derived, not Analyst Estimate."""
+    block = valuation_block(text)
+    tagged = ("Modeling Assumption" in block or "Derived Valuation" in block)
+    mislabeled = "Analyst Estimate" in block
+    return tagged and not mislabeled
+
+
 class FieldExtractionSelfTests(unittest.TestCase):
     """The parser itself must reject wrong values in designated fields."""
 
@@ -106,6 +123,16 @@ class FieldExtractionSelfTests(unittest.TestCase):
     def test_missing_field_rejected(self):
         with self.assertRaises(AssertionError):
             parse_full_report("A report without the labeled valuation block.")
+
+    def test_valuation_labeling_rule_detects_mislabel(self):
+        good = self._sample(14.67).replace(
+            "Margin-of-safety buy price: $9.53",
+            "Margin-of-safety buy price: $9.53 — Derived Valuation")
+        self.assertTrue(check_valuation_labeling(good))
+        bad = self._sample(14.67).replace(
+            "Margin-of-safety buy price: $9.53",
+            "Margin-of-safety buy price: $9.53 — Analyst Estimate")
+        self.assertFalse(check_valuation_labeling(bad))
 
 
 @unittest.skipUnless(FULL.is_file(), "behavioral outputs not generated")
@@ -148,6 +175,12 @@ class FullResearchOutputTests(unittest.TestCase):
         self.assertIn("Unavailable Information", self.text)
         self.assertRegex(self.text, r"(?i)simulated|one model|not independent")
         self.assertRegex(self.text, r"(?i)not a guaranteed floor|does not cap losses")
+
+    def test_valuation_fields_not_labeled_analyst_estimate(self):
+        self.assertTrue(check_valuation_labeling(self.text),
+                        "valuation summary must be labeled Modeling Assumption / Derived Valuation, not Analyst Estimate")
+        self.assertNotIn("Analyst Estimate (Hypothetical)", self.text,
+                         "model-derived values must not be attributed as Analyst Estimates")
 
     def test_quick_price_consistency_same_fixture(self):
         """Full and Quick outputs on identical inputs must make the same decision."""
