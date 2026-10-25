@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. The format follows Keep a Changelog principles, and versions use Semantic Versioning.
 
+## [1.1.1] - 2026-10-25
+
+### Fixed
+
+- **Reinvestment was tied to revenue growth, not profit growth.** V1.1 used `reinvestment rate = revenue growth / ROIC`, but with changing EBIT margins NOPAT grows at a different rate (Base Year 2: revenue +7.00% vs NOPAT +8.43%). Explicit years now use an incremental-investment model: `Reinvestment_t = max(0, NOPAT_t − NOPAT_(t−1)) / incremental ROIC`, `FCFF_t = NOPAT_t − Reinvestment_t`. Declining NOPAT no longer releases capital automatically (reinvestment floors at zero) absent explicit divestment assumptions. Historical reconciliation: FY2025 actual reinvestment of 25 against ΔNOPAT of 15 implies ~60% historical incremental ROIC versus the fixture's deliberately conservative 7.5–15% forecast assumptions.
+- **Mode-dependent margin-of-safety haircuts.** Identical inputs previously produced 35% in Full Research and 25% in Quick Price, implying conflicting actions around the USD 10.50 price. The nine-factor assessment now has reproducible anchors (terminal dependence, leverage, customer concentration, scenario dispersion, evidence quality) and a band-selection rule (3+ High → 30–40%, reference 35%; 1–2 → 25%; 0 → 15%). Full, Quick, and standalone runs now all select 35% and a USD 9.54 buy price; divergence requires a documented difference in evidence, not output mode.
+
+### Changed
+
+- Valuations updated for the corrected reinvestment model: Bear 6.591866 (was 7.098724), Base 14.671745 (was 14.777213), Bull 25.027497 (was 26.052694). Base intrinsic value rose slightly because explicit-year reinvestment now follows NOPAT growth at incremental ROIC rather than revenue growth; Bear fell because a shrinking business no longer releases capital by assumption.
+- Manager verdict now requires a labeled Valuation Summary block (`Bear/Base/Bull value per share`, `Margin-of-safety haircut`, `Margin-of-safety buy price`), making reported answers machine-checkable.
+
+### Tests
+
+- Behavioral tests now extract values from designated labeled fields instead of scanning the whole document, so a correct number elsewhere cannot mask a wrong valuation field.
+- Added parser self-tests: wrong field values detected, values in prose do not satisfy field checks, missing fields rejected.
+- Added Full-vs-Quick consistency tests (same Base, same haircut, consistent buy price) and an exact cross-mode haircut check with the standalone Prompt.
+- 42 tests pass.
+
 ## [1.1.0] - 2026-10-25
 
 ### Fixed

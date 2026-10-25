@@ -120,6 +120,16 @@ Terminal economics must connect to the explicit forecast without an unexplained 
 
 Do not count terminal reinvestment twice. If terminal FCFF instead comes from a different cash-flow definition (for example NOPAT + D&A - CapEx - ΔNWC), show that it reconciles to the same economics. When implied terminal NOPAT diverges from the explicit forecast's final-year NOPAT carried forward by more than a small rounding tolerance, treat it as an **unexplained normalization**: either justify the transition explicitly (for example margin convergence to a stated mature level) or revise the forecast/terminal assumptions. Never let the terminal year silently weaken or strengthen profitability relative to the explicit trend.
 
+#### Reinvestment and ROIC Consistency
+
+Distinguish revenue growth, NOPAT growth, average ROIC, and incremental ROIC. Do not treat revenue growth as profit growth: whenever margins change, NOPAT grows at a different rate than revenue.
+
+- Preferred explicit-year model: `Reinvestment_t = (NOPAT_t - NOPAT_(t-1)) / incremental ROIC`, then `FCFF_t = NOPAT_t - Reinvestment_t`.
+- A revenue-driven sales-to-capital model is acceptable when disclosed and applied consistently.
+- Do not assume declining revenue or NOPAT automatically releases invested capital. Without explicit divestment or working-capital evidence, floor reinvestment at zero.
+- Where data allow, reconcile forecast reinvestment with historical capex, depreciation, working-capital change, and cash conversion; explain material gaps.
+- The stable-state reinvestment rate `terminal growth / terminal ROIC` applies only in the terminal year, where revenue and NOPAT growth converge.
+
 For FCFE, discount at cost of equity, calculate equity value directly, and do not apply the enterprise-to-equity bridge. Never mix FCFF with cost of equity or FCFE with WACC.
 
 #### Dilution and Consistency Checks
@@ -154,6 +164,19 @@ Do not apply a universal haircut. Assess each factor as Low / Medium / High conc
 9. Quality, freshness, and completeness of evidence
 
 Use the assessment to select a haircut band, not a point estimate: roughly **10–20%** when concerns are predominantly Low, **20–30%** for a Medium profile, **30–40%** for predominantly High concerns. If several factors are High and evidence quality is poor, or if material inputs are missing, **withhold the precise buy price** instead of selecting an arbitrary number. State the chosen band, the specific factors driving it, and the exact haircut used.
+
+**Reproducible anchors (use where data allow):**
+
+- Terminal-value dependence: PV of TV / EV **> 75% High**, 60–75% Medium, < 60% Low.
+- Leverage: net debt / EBITDA **> 3.5x High**, 2.0–3.5x Medium, < 2.0x Low.
+- Customer concentration: largest customer **> 20% of revenue High**, 10–20% Medium, < 10% Low.
+- Scenario dispersion: (Bull − Bear) / Base **> 100% High**, 50–100% Medium, < 50% Low.
+- Evidence quality: single-source, stale, or materially incomplete disclosure (significant Unavailable Information) → **High**; multiple current primary sources → Low.
+- Forecast uncertainty, cyclicality, durability, management and organizational uncertainty: judgment with stated rationale.
+
+**Band selection:** count High factors — **3 or more → 30–40% band; 1–2 → 20–30%; 0 → 10–20%**. The count selects the band; the precise haircut still requires judgment and defaults to the band reference value (35% / 25% / 15%) for cross-mode consistency.
+
+**Mode consistency rule:** the margin-of-safety assessment is a function of inputs and evidence, not of output verbosity. For identical inputs, assumptions, and evidence, Full Research and Quick Price must use the same factor ratings, the same band, and the same haircut; a different result requires an identifiable difference in assumptions or evidence, never output mode alone. To keep results reproducible without false precision, use the band reference value — **15%** for the Low band, **25%** for Medium, **35%** for High — unless the factor table documents a specific reason to move within the band. Quick Price Mode performs the same nine-factor assessment internally; it merely reports less.
 
 Always distinguish three different quantities:
 
@@ -249,7 +272,7 @@ Use these nine sections without redundant repetition:
 5. **Key Disagreements & Bear Case** — adversarial findings, triggers, and invalidation conditions.
 6. **McKinsey 7S Diagnosis** — the seven dimensions, three ratings, and evidence limits.
 7. **Investment Execution Strategy** — conditional entries, tranches, reassessment, and horizon-based actions.
-8. **Manager Final Verdict** — rating rationale, scenario values, three arguments, three risks, and the three explicit questions.
+8. **Manager Final Verdict** — rating rationale, scenario values, three arguments, three risks, and the three explicit questions. Include a machine-checkable summary block with exactly these labels: `Bear value per share:`, `Base value per share:`, `Bull value per share:`, `Margin-of-safety haircut:`, and `Margin-of-safety buy price:` (or `Not Rated — insufficient evidence:` with the reason). These labeled fields are the report's valuation answers of record.
 9. **Sources, Assumptions & Limitations** — traceable sources, evidence labels, execution method, missing data, and non-personalized research disclosure.
 
 ### Quick Price Mode

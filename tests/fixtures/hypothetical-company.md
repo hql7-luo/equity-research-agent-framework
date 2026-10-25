@@ -53,19 +53,19 @@ The FY2025 normalized cash tax rate is 25%. SBC is already expensed in EBIT and 
 
 ## Forecast Method (Modeling Assumptions, Hypothetical)
 
-Forecast FCFF is **driver-derived**, not an arbitrary fixed vector. For each explicit year:
+Forecast FCFF is **driver-derived**, not an arbitrary fixed vector. The explicit years use an incremental-investment model: reinvestment funds NOPAT growth at the scenario's incremental ROIC. Revenue growth and NOPAT growth differ whenever EBIT margins change — do not use revenue growth as a proxy for profit growth. For each explicit year:
 
 ```text
 Revenue_t = Revenue_(t-1) × (1 + growth_t)
 EBIT_t = Revenue_t × EBIT margin_t
 NOPAT_t = EBIT_t × (1 - 25% cash tax rate)
-Reinvestment rate_t = growth_t / ROIC
-FCFF_t = NOPAT_t × (1 - Reinvestment rate_t)
+Reinvestment_t = max(0, NOPAT_t - NOPAT_(t-1)) / incremental ROIC
+FCFF_t = NOPAT_t - Reinvestment_t
 ```
 
-A negative growth rate implies negative reinvestment (capital release) and therefore FCFF above NOPAT; this is intentional and economically valid for a shrinking business.
+Declining NOPAT does **not** release invested capital: reinvestment floors at zero, because the fixture makes no divestment or working-capital-release assumption. For reference, FY2025 actual reinvestment (CapEx 45 − D&A 30 + ΔNWC 10 = 25) against ΔNOPAT (112.5 − 97.5 = 15) implies a historical incremental ROIC of about 60%; the forecast's 7.5–15% incremental ROIC assumptions are deliberately more conservative — note this gap explicitly in the report.
 
-Terminal-year economics must connect to Year 5 without discontinuity:
+Terminal-year economics are a steady state in which revenue growth equals NOPAT growth:
 
 ```text
 Terminal NOPAT = Year 5 NOPAT × (1 + terminal growth)

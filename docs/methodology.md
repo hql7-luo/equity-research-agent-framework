@@ -70,9 +70,20 @@ Intrinsic value per share = common equity value / diluted shares
 
 `WACC` must exceed `g`. Explain the cash-flow base, tax rate, reinvestment, cost of capital, terminal growth, and forecast horizon. If mid-year discounting is used, apply it consistently. Review terminal value as a share of EV and inspect implied terminal multiples.
 
-### Terminal-Year Normalization
+### Reinvestment, ROIC, and Terminal-Year Normalization
 
-The terminal year is a continuation of the business, not a new company. Connect it to the explicit forecast:
+Distinguish four quantities: revenue growth, NOPAT growth, average ROIC, and incremental ROIC. Margins change over time, so revenue growth is not profit growth.
+
+For explicit forecast years, prefer an incremental-investment model:
+
+```text
+Reinvestment_t = (NOPAT_t - NOPAT_(t-1)) / incremental ROIC
+FCFF_t = NOPAT_t - Reinvestment_t
+```
+
+A sales-to-capital variant is acceptable when disclosed. Do not let declining NOPAT automatically release invested capital; without divestment evidence, floor reinvestment at zero. Reconcile forecast reinvestment with historical capex, depreciation, working-capital change, and cash conversion where feasible, and explain material gaps.
+
+The terminal year is a steady state where revenue growth equals NOPAT growth, so the stable-state reinvestment rate `terminal growth / terminal ROIC` applies there and only there:
 
 ```text
 Terminal NOPAT = final explicit-year NOPAT × (1 + terminal growth)
@@ -113,6 +124,10 @@ The haircut is a research judgment, not a universal constant. Assess nine factor
 9. Quality, freshness, and completeness of evidence
 
 Select a band rather than a false-precision formula: roughly 10–20% for predominantly Low concerns, 20–30% for Medium, 30–40% for High. When several factors are High and evidence is poor, or material inputs are missing, withhold the precise buy price.
+
+Anchors keep the band reproducible: terminal dependence >75% of EV is High (60–75% Medium); net debt/EBITDA >3.5x High (2.0–3.5x Medium); largest customer >20% of revenue High (10–20% Medium); scenario dispersion (Bull−Bear)/Base >100% High (50–100% Medium); single-source, stale, or materially incomplete evidence is High. Count High factors: 3+ → 30–40% band; 1–2 → 20–30%; 0 → 10–20%. Use the band reference value (35/25/15%) unless a specific within-band reason is documented.
+
+**Mode consistency:** the assessment depends on inputs and evidence, not on output length. Identical inputs must yield identical factor ratings, band, and haircut in Full Research and Quick Price. Use the band reference value (15% / 25% / 35%) unless the factor table documents a specific reason to move within the band. Any divergence between modes requires an identifiable difference in assumptions or evidence.
 
 Report three distinct quantities and never merge them:
 

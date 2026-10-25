@@ -46,19 +46,39 @@ SCENARIOS = {
 
 
 def forecast(s: Scenario) -> dict:
-    """Derive the explicit FCFF path and terminal-year economics from drivers."""
-    revenue, nopat_path, fcff_path = FY2025_REVENUE, [], []
+    """Derive the explicit FCFF path and terminal-year economics from drivers.
+
+    Explicit years use an incremental-investment model: reinvestment funds
+    NOPAT growth at the scenario's incremental ROIC, not revenue growth.
+    Revenue growth and NOPAT growth differ whenever EBIT margins change.
+
+    Reinvestment_t = max(0, NOPAT_t - NOPAT_(t-1)) / incremental ROIC
+    FCFF_t         = NOPAT_t - Reinvestment_t
+
+    Declining NOPAT does NOT release invested capital by default (reinvestment
+    floors at zero); capital release would require explicit divestment
+    assumptions, which this fixture does not make.
+
+    The terminal year is a steady state where revenue growth = NOPAT growth =
+    terminal growth, so the stable-state reinvestment rate g/terminal ROIC is
+    valid there and only there.
+    """
+    revenue, nopat_path = FY2025_REVENUE, [150.0 * (1 - TAX)]  # FY2025 base NOPAT
     for g, margin in zip(s.growth, s.margins):
         revenue *= 1 + g
-        nopat = revenue * margin * (1 - TAX)
-        reinvestment = g / s.roic
-        nopat_path.append(nopat)
-        fcff_path.append(nopat * (1 - reinvestment))
+        nopat_path.append(revenue * margin * (1 - TAX))
+    reinvestment_path, fcff_path = [], []
+    for t in range(1, 6):
+        delta_nopat = nopat_path[t] - nopat_path[t - 1]
+        reinvestment = max(0.0, delta_nopat) / s.roic
+        reinvestment_path.append(reinvestment)
+        fcff_path.append(nopat_path[t] - reinvestment)
     terminal_nopat = nopat_path[-1] * (1 + s.terminal_growth)
     terminal_reinvestment = s.terminal_growth / s.roic
     terminal_fcff = terminal_nopat * (1 - terminal_reinvestment)
     return {
-        "nopat": nopat_path,
+        "nopat": nopat_path[1:],
+        "reinvestment": reinvestment_path,
         "fcff": fcff_path,
         "terminal_nopat": terminal_nopat,
         "terminal_reinvestment": terminal_reinvestment,

@@ -149,8 +149,12 @@
 ## 8. Manager Final Verdict
 
 - **Rating:** [ ] with [confidence] confidence.
-- **Bear / Base / Bull values:** [ ] / [ ] / [ ] per share, dated [ ].
-- **Margin-of-safety buy price:** [ ] or unavailable because [ ].
+- **Valuation Summary (answers of record):**
+  - `Bear value per share:` [ ]
+  - `Base value per share:` [ ]
+  - `Bull value per share:` [ ]
+  - `Margin-of-safety haircut:` [band and reference or justified deviation]
+  - `Margin-of-safety buy price:` [or "Not Rated — insufficient evidence: reason"]
 - **Three central arguments:** (1) [ ] (2) [ ] (3) [ ].
 - **Three major risks:** (1) [ ] (2) [ ] (3) [ ].
 - **Is this an excellent company?** [Answer and evidence.]

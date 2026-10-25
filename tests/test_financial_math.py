@@ -23,23 +23,32 @@ class DriverModelTests(unittest.TestCase):
         self.assertAlmostEqual(SCENARIOS["Base"].wacc, 0.09, places=6)
         self.assertAlmostEqual(SCENARIOS["Bull"].wacc, 0.08, places=6)
 
-    def test_explicit_fcff_is_driver_derived(self):
-        # Base Y1: revenue 1080, EBIT 15.0%, NOPAT 121.5, reinvestment 8%/12.5%=64%
+    def test_explicit_fcff_is_incremental_nopat_driven(self):
+        # Base Y1: NOPAT 121.5, delta vs FY2025 base NOPAT 112.5 = 9.0,
+        # reinvestment = 9.0 / 12.5% incremental ROIC = 72.0, FCFF = 49.5
         f = forecast(SCENARIOS["Base"])
         self.assertAlmostEqual(f["nopat"][0], 121.5, places=6)
-        self.assertAlmostEqual(f["fcff"][0], 121.5 * 0.36, places=6)
+        self.assertAlmostEqual(f["reinvestment"][0], 72.0, places=6)
+        self.assertAlmostEqual(f["fcff"][0], 49.5, places=6)
 
-    def test_negative_growth_releases_capital(self):
-        # Bear Y1: shrinking business has FCFF above NOPAT (negative reinvestment)
+    def test_revenue_growth_differs_from_nopat_growth(self):
+        # Margin expansion makes NOPAT grow faster than revenue (V1.1 defect)
+        f = forecast(SCENARIOS["Base"])
+        self.assertAlmostEqual(f["nopat"][1] / f["nopat"][0] - 1, 0.0843, places=3)
+        self.assertNotAlmostEqual(f["nopat"][1] / f["nopat"][0] - 1, 0.07, places=3)
+
+    def test_declining_nopat_does_not_release_capital(self):
+        # Bear Y1 NOPAT declines; reinvestment floors at zero, FCFF = NOPAT
         f = forecast(SCENARIOS["Bear"])
-        self.assertGreater(f["fcff"][0], f["nopat"][0])
+        self.assertAlmostEqual(f["reinvestment"][0], 0.0, places=12)
+        self.assertAlmostEqual(f["fcff"][0], f["nopat"][0], places=12)
 
     def test_scenario_values_are_stable(self):
-        # Regression guard: driver-based values must not drift silently.
+        # Regression guard: incremental-ROIC driver values must not drift.
         expected = expected_values()
-        self.assertAlmostEqual(expected["Bear"]["per_share"], 7.098724, places=4)
-        self.assertAlmostEqual(expected["Base"]["per_share"], 14.777213, places=4)
-        self.assertAlmostEqual(expected["Bull"]["per_share"], 26.052694, places=4)
+        self.assertAlmostEqual(expected["Bear"]["per_share"], 6.591866, places=4)
+        self.assertAlmostEqual(expected["Base"]["per_share"], 14.671745, places=4)
+        self.assertAlmostEqual(expected["Bull"]["per_share"], 25.027497, places=4)
 
     def test_bear_less_than_base_less_than_bull(self):
         e = expected_values()
